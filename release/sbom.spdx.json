@@ -1,0 +1,43 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "annotations": [
+    {
+      "annotationDate": "2026-11-07T00:00:00Z",
+      "annotationType": "OTHER",
+      "annotator": "Tool: scripts/release_evidence.py",
+      "comment": "No third-party runtime packages. Python interpreter and optional setuptools build tooling are environment prerequisites, not bundled components. File-level integrity is recorded in release/public-candidate-manifest.json, not in this SBOM (filesAnalyzed false)."
+    }
+  ],
+  "creationInfo": {
+    "created": "2026-11-07T00:00:00Z",
+    "creators": [
+      "Organization: KRE SOLUTION ENGINEERING LLC",
+      "Tool: scripts/release_evidence.py"
+    ]
+  },
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://github.com/kre-solution-engineering/open-sovereign-router/spdx/0.1.0",
+  "name": "open-sovereign-router-candidate-sbom",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-OSR",
+      "comment": "Public alpha. Runtime dependencies: Python standard library only. Build backend pinned for release verification to setuptools 75.9.1; the wheel is not bundled and validation never fetches it.",
+      "copyrightText": "Copyright 2026 KRE SOLUTION ENGINEERING LLC",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "name": "open-sovereign-router",
+      "versionInfo": "0.1.0"
+    }
+  ],
+  "relationships": [
+    {
+      "relatedSpdxElement": "SPDXRef-Package-OSR",
+      "relationshipType": "DESCRIBES",
+      "spdxElementId": "SPDXRef-DOCUMENT"
+    }
+  ],
+  "spdxVersion": "SPDX-2.3"
+}

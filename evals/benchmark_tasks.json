@@ -1,0 +1,131 @@
+{
+  "schema_version": 2,
+  "description": "Synthetic routing-policy tasks; no model-quality inference is performed.",
+  "assumptions": {
+    "baseline": "Every completed non-sensitive (public/internal) task would otherwise use a hypothetical cloud-large route. Sensitive and refused tasks are excluded from the economic comparison.",
+    "prices_usd_per_1m_tokens": {
+      "cloud-large": 10.0,
+      "cloud-advanced": 4.0,
+      "local": 0.0
+    },
+    "token_method": "Declared synthetic token budgets, not tokenizer measurements.",
+    "latency_method": "Deterministic policy operation count; not wall-clock model latency."
+  },
+  "models": [
+    {
+      "model_id": "local-basic",
+      "provider_id": "local",
+      "capability": 1,
+      "cost_rank": 0
+    },
+    {
+      "model_id": "local-standard",
+      "provider_id": "local",
+      "capability": 2,
+      "cost_rank": 1
+    },
+    {
+      "model_id": "cloud-advanced",
+      "provider_id": "cloud",
+      "capability": 3,
+      "cost_rank": 4
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t01",
+      "sensitivity": "public",
+      "capability": 1,
+      "expected": "local-basic",
+      "baseline_tokens": 900,
+      "routed_tokens": 500
+    },
+    {
+      "id": "t02",
+      "sensitivity": "internal",
+      "capability": 1,
+      "expected": "local-basic",
+      "baseline_tokens": 800,
+      "routed_tokens": 450
+    },
+    {
+      "id": "t03",
+      "sensitivity": "confidential",
+      "capability": 1,
+      "expected": "local-basic",
+      "baseline_tokens": 1000,
+      "routed_tokens": 600
+    },
+    {
+      "id": "t04",
+      "sensitivity": "restricted",
+      "capability": 1,
+      "expected": "local-basic",
+      "baseline_tokens": 700,
+      "routed_tokens": 400
+    },
+    {
+      "id": "t05",
+      "sensitivity": "public",
+      "capability": 2,
+      "expected": "local-standard",
+      "baseline_tokens": 1500,
+      "routed_tokens": 900
+    },
+    {
+      "id": "t06",
+      "sensitivity": "internal",
+      "capability": 2,
+      "expected": "local-standard",
+      "baseline_tokens": 1400,
+      "routed_tokens": 850
+    },
+    {
+      "id": "t07",
+      "sensitivity": "confidential",
+      "capability": 2,
+      "expected": "local-standard",
+      "baseline_tokens": 1600,
+      "routed_tokens": 950
+    },
+    {
+      "id": "t08",
+      "sensitivity": "restricted",
+      "capability": 2,
+      "expected": "local-standard",
+      "baseline_tokens": 1300,
+      "routed_tokens": 800
+    },
+    {
+      "id": "t09",
+      "sensitivity": "public",
+      "capability": 3,
+      "expected": "approval_required",
+      "baseline_tokens": 2200,
+      "routed_tokens": 1900
+    },
+    {
+      "id": "t10",
+      "sensitivity": "confidential",
+      "capability": 3,
+      "expected": "sensitive_local_unavailable",
+      "baseline_tokens": 2000,
+      "routed_tokens": 0
+    },
+    {
+      "id": "t11",
+      "sensitivity": "public",
+      "capability": 3,
+      "approved": true,
+      "expected": "cloud-advanced",
+      "baseline_tokens": 2100,
+      "routed_tokens": 1800
+    }
+  ],
+  "thresholds": {
+    "selection_accuracy_min": 1.0,
+    "unauthorized_cloud_rate_max": 0.0,
+    "sensitive_leak_rate_max": 0.0,
+    "local_completion_rate_min": 0.6
+  }
+}

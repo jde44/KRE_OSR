@@ -1,0 +1,11 @@
+{
+  "registry_version": "example-v1",
+  "providers": [
+    {"provider_id": "local-llama", "kind": "local", "endpoint": "http://127.0.0.1:8081", "allowed_hosts": ["127.0.0.1"], "enabled": true},
+    {"provider_id": "approved-cloud", "kind": "cloud", "endpoint": "https://api.example.invalid:443", "allowed_hosts": ["api.example.invalid"], "enabled": false}
+  ],
+  "models": [
+    {"model_id": "local-small", "provider_id": "local-llama", "capability": "basic", "cost_rank": 0, "enabled": true},
+    {"model_id": "cloud-advanced", "provider_id": "approved-cloud", "capability": "advanced", "cost_rank": 10, "enabled": false}
+  ]
+}

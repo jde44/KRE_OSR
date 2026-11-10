@@ -1,0 +1,353 @@
+{
+  "files": [
+    {
+      "bytes": 399,
+      "classification": "public_candidate",
+      "path": ".gitignore",
+      "sha256": "511472fc91659755e9499de89d7440247d3d157afa9144b147cd2fa7ccc77dee"
+    },
+    {
+      "bytes": 1661,
+      "classification": "public_candidate",
+      "path": "CHANGELOG.md",
+      "sha256": "12371bfe4beba9a338c83b284f0d5cdb4de804be9a39e5c6da9bac4835b54c72"
+    },
+    {
+      "bytes": 578,
+      "classification": "public_candidate",
+      "path": "CODE_OF_CONDUCT.md",
+      "sha256": "54cac0055e7ef6628920f97053313e2201cad93675d187fc4087a29127a40202"
+    },
+    {
+      "bytes": 799,
+      "classification": "public_candidate",
+      "path": "CONTRIBUTING.md",
+      "sha256": "514060f660ba14abe6cf94eca8566005438a884d3ce812421eb6e7036c0d3205"
+    },
+    {
+      "bytes": 573,
+      "classification": "public_candidate",
+      "path": "GOVERNANCE.md",
+      "sha256": "365b581eb749a14c7e1a75d368ea54ebf4bb6a8bf1a853dccfe81d80208c66e8"
+    },
+    {
+      "bytes": 11359,
+      "classification": "public_candidate",
+      "path": "LICENSE",
+      "sha256": "8c6db340475136df3c1201d458fa5755698eace76e510471ecc9d857d6083dac"
+    },
+    {
+      "bytes": 604,
+      "classification": "public_candidate",
+      "path": "MAINTAINERS.md",
+      "sha256": "ccb4c1587c455a912d37cbe971b9fb1f4097c69c9a9372484589b74845d2246e"
+    },
+    {
+      "bytes": 203,
+      "classification": "public_candidate",
+      "path": "NOTICE",
+      "sha256": "a336c62c025dfc5f6e89b3e7124c64146e37df7200fecdfd7bf1deb021aa0510"
+    },
+    {
+      "bytes": 4349,
+      "classification": "public_candidate",
+      "path": "README.md",
+      "sha256": "9d3a7f34a58aefd5356d88a9cc023c27f307f5c5bf81d38e246d8f3934cde0cb"
+    },
+    {
+      "bytes": 1009,
+      "classification": "public_candidate",
+      "path": "SECURITY.md",
+      "sha256": "b918b1440b5c688298d5fb913def475499752d7fcfe71b9df75a321ff8db2285"
+    },
+    {
+      "bytes": 629,
+      "classification": "public_candidate",
+      "path": "config/example-registry.json",
+      "sha256": "2e0d16b77bf8af9adbf9fef6f0deb7e696b7d6ca1a14d26ed86af44c7ae40cfd"
+    },
+    {
+      "bytes": 2052,
+      "classification": "public_candidate",
+      "path": "docs/BENCHMARK.md",
+      "sha256": "7c032f57ca53194f923c24cebae3b301e97e40f36288d83da463912b7cd39737"
+    },
+    {
+      "bytes": 2446,
+      "classification": "public_candidate",
+      "path": "docs/CLAIM_TO_EVIDENCE.md",
+      "sha256": "4783f0625a2a4ccfe36aef1d536d08e5b6b7c962e90f92e806739276b6ce51b3"
+    },
+    {
+      "bytes": 7674,
+      "classification": "public_candidate",
+      "path": "docs/LOCALHOST_TRANSPORT.md",
+      "sha256": "f258a9c5b3ae88da0036c885bc0e2a373ca13ff972b06dc0367fa0ff8ffcf402"
+    },
+    {
+      "bytes": 598,
+      "classification": "public_candidate",
+      "path": "docs/PROVENANCE.md",
+      "sha256": "3ff2c3afce0db9e83134f903f480635c6575bf13c9cad60215a9fc76d563ee0c"
+    },
+    {
+      "bytes": 989,
+      "classification": "public_candidate",
+      "path": "docs/PUBLIC_CANDIDATE_MANIFEST.md",
+      "sha256": "5b73b8441b3561338d2ffe2ca97bf114b35437a7c6f140b570d94fd190b6cb3d"
+    },
+    {
+      "bytes": 3635,
+      "classification": "public_candidate",
+      "path": "docs/REPRODUCIBILITY.md",
+      "sha256": "502715fcc627744f01c451b0a8952147bb7abdf620fdfe994200ae1249bfd17d"
+    },
+    {
+      "bytes": 2545,
+      "classification": "public_candidate",
+      "path": "docs/SECURITY_CORE.md",
+      "sha256": "15bf2f14b5f6c26a0f291fa1a25b6601c91e8f2432b680fac67b288f576fa452"
+    },
+    {
+      "bytes": 3459,
+      "classification": "public_candidate",
+      "path": "docs/SECURITY_EVALUATION.md",
+      "sha256": "447ad44371ccb9d841e8f15e5acf6c64a4711fc963e26cb2123b2a369e31b103"
+    },
+    {
+      "bytes": 1777,
+      "classification": "public_candidate",
+      "path": "docs/SECURITY_EVALUATION_RUNBOOK.md",
+      "sha256": "19f9c656a0de824f4ca191dd909fbe2f8e1eab81c62ed4a5f71147ee32c31b66"
+    },
+    {
+      "bytes": 5936,
+      "classification": "public_candidate",
+      "path": "docs/THREAT_MODEL.md",
+      "sha256": "9285adb0ebc72b10bc7ab807103909b2169b79bd95aeb45908b80312be50fe7c"
+    },
+    {
+      "bytes": 6788,
+      "classification": "public_candidate",
+      "path": "evals/adversarial_catalog.json",
+      "sha256": "5a9552a982ddc5783331f6bcc787ddf2d4da06d737713239bcd2849c496f7ff6"
+    },
+    {
+      "bytes": 3240,
+      "classification": "public_candidate",
+      "path": "evals/benchmark_tasks.json",
+      "sha256": "c93807393cfccbeac14496a4e6dff5e591ef86b5900894443c53ac61ed2b2a2b"
+    },
+    {
+      "bytes": 34104,
+      "classification": "public_candidate",
+      "path": "evals/results/adversarial-full.json",
+      "sha256": "5185d7dce429096f753a40a0e7438f1e1f4a04630b30e2e9bbae5c66cd0563c3"
+    },
+    {
+      "bytes": 29459,
+      "classification": "public_candidate",
+      "path": "evals/results/adversarial-sandbox.json",
+      "sha256": "fa8a460f4062ee8557f0e9152cd598be09a651452f580b803995c23964db6767"
+    },
+    {
+      "bytes": 4552,
+      "classification": "public_candidate",
+      "path": "evals/results/routing-benchmark.json",
+      "sha256": "b95cdcdaf6e3fc3d352b1712175d21ed00b4421b999457a67052a7f65c41377e"
+    },
+    {
+      "bytes": 821,
+      "classification": "public_candidate",
+      "path": "pyproject.toml",
+      "sha256": "c56c813b2986ed2102b41b655d7ae174bf40676a0c7184069d7bca3bbea5e4f2"
+    },
+    {
+      "bytes": 833,
+      "classification": "public_candidate",
+      "path": "release/dependency-lock.json",
+      "sha256": "822e7f836bbb6fdd73af3ffd60fc4f278f762814543ad129251a83043a70c59d"
+    },
+    {
+      "bytes": null,
+      "classification": "release_metadata",
+      "path": "release/public-candidate-manifest.json",
+      "sha256": null
+    },
+    {
+      "bytes": 1648,
+      "classification": "public_candidate",
+      "path": "release/sbom.spdx.json",
+      "sha256": "0f1d075cede9e888fbf564159cd5f9092dc951fe984801c69c2a3cc4b3ed58cb"
+    },
+    {
+      "bytes": 2682,
+      "classification": "public_candidate",
+      "path": "scripts/demo.py",
+      "sha256": "fae672d56c1f2983966a4aa829cdb58b47f0edd50bf9c1d6a16e1c6896a3e75c"
+    },
+    {
+      "bytes": 163,
+      "classification": "public_candidate",
+      "path": "scripts/demo.sh",
+      "sha256": "a69f10ce4d20b44a72d1ace0c783261a5d04910667b7cb39cea234a02091ddfb"
+    },
+    {
+      "bytes": 3350,
+      "classification": "public_candidate",
+      "path": "scripts/export_candidate.py",
+      "sha256": "64f0814507f5949d3149ddf5d23c08280dcee37e575d6c3998f01ad827a61685"
+    },
+    {
+      "bytes": 10495,
+      "classification": "public_candidate",
+      "path": "scripts/release_evidence.py",
+      "sha256": "526fd04c65269495361c683853c127e03fc1fb316ab01eedb20613c6cfc43c54"
+    },
+    {
+      "bytes": 6884,
+      "classification": "public_candidate",
+      "path": "scripts/run_adversarial_eval.py",
+      "sha256": "6bfc993e5d55877abfc649aad139e22a8ba754edfa4499804f5ac9921d0de4a6"
+    },
+    {
+      "bytes": 7218,
+      "classification": "public_candidate",
+      "path": "scripts/run_routing_benchmark.py",
+      "sha256": "89426f37a873dd3f1eff9b29d5808be5826d96fc27b8a9bd1473979dac1b549b"
+    },
+    {
+      "bytes": 324,
+      "classification": "public_candidate",
+      "path": "scripts/setup.sh",
+      "sha256": "701a7dc215d7d155d489800c2f347305769e6c3167d0fd72b6e2905e3061808c"
+    },
+    {
+      "bytes": 175,
+      "classification": "public_candidate",
+      "path": "scripts/test.sh",
+      "sha256": "22f5aa752efe97d9395ad0c9de91b60cbf4f277b63f8083975f4441504281746"
+    },
+    {
+      "bytes": 7228,
+      "classification": "public_candidate",
+      "path": "scripts/validate_release.py",
+      "sha256": "804c7d69bbbe59a4c3962ec107e64190703e1b939eae758246112e23b75144b1"
+    },
+    {
+      "bytes": 129,
+      "classification": "public_candidate",
+      "path": "src/open_sovereign_router/__init__.py",
+      "sha256": "9c5e0b303ff09d8ae06a5150d983bb28364cb0290be6188eca82fac57ffc943d"
+    },
+    {
+      "bytes": 5941,
+      "classification": "public_candidate",
+      "path": "src/open_sovereign_router/approvals.py",
+      "sha256": "dd2dca8dca96b70002a36439c8c4750783030cf75f5ee45aea68ca09cf251f93"
+    },
+    {
+      "bytes": 2006,
+      "classification": "public_candidate",
+      "path": "src/open_sovereign_router/audit.py",
+      "sha256": "651ed16416199bba3af8816d99b225a8bd3e7bb19812db3c9abf9ff63fc26d09"
+    },
+    {
+      "bytes": 1482,
+      "classification": "public_candidate",
+      "path": "src/open_sovereign_router/audit_sink.py",
+      "sha256": "03502e3566e419b357128fbc73817ee16670de9ccb2b1036179f246d2f79ac98"
+    },
+    {
+      "bytes": 2218,
+      "classification": "public_candidate",
+      "path": "src/open_sovereign_router/endpoints.py",
+      "sha256": "bd7e61f9c369da5f62dd8810e90916e4fd076a2f3159cc3abc91c0a5ccc98973"
+    },
+    {
+      "bytes": 1346,
+      "classification": "public_candidate",
+      "path": "src/open_sovereign_router/models.py",
+      "sha256": "5c045820093f86cc08dc408ae8a27cf2f15489875c1c7310ee0e536e5b06fb0a"
+    },
+    {
+      "bytes": 6192,
+      "classification": "public_candidate",
+      "path": "src/open_sovereign_router/policy.py",
+      "sha256": "5ca2760e5e398eba88590a827267bbe7c334fcef7aeab1f763a974608dde8f6d"
+    },
+    {
+      "bytes": 2715,
+      "classification": "public_candidate",
+      "path": "src/open_sovereign_router/providers.py",
+      "sha256": "5d5f5f7622c81c5b76f6a274999dbb21ac2358ee2d83987466d813cb7bb0ed89"
+    },
+    {
+      "bytes": 1798,
+      "classification": "public_candidate",
+      "path": "src/open_sovereign_router/registry.py",
+      "sha256": "c120afd2659840ca295d383ab25b947d5e87790baa9e2b22948b276789850560"
+    },
+    {
+      "bytes": 25235,
+      "classification": "public_candidate",
+      "path": "src/open_sovereign_router/transport.py",
+      "sha256": "a6946755119608bd92a294da02f7e3d4bd8a3eb5b443966266d1d09f686dca37"
+    },
+    {
+      "bytes": 7548,
+      "classification": "public_candidate",
+      "path": "tests/test_adversarial_eval.py",
+      "sha256": "216f87dfa1f7ca6b285108b382e0a4b89ef5f0c3debfa88bd78be1e79faa94f0"
+    },
+    {
+      "bytes": 2142,
+      "classification": "public_candidate",
+      "path": "tests/test_adversarial_runner.py",
+      "sha256": "5fba4c3c3edecb9fa49e085bc6cbf30625296b7fc5169448badfde1a6fedc081"
+    },
+    {
+      "bytes": 2111,
+      "classification": "public_candidate",
+      "path": "tests/test_candidate_manifest.py",
+      "sha256": "7d9f6a9fa7ec9bfeb804ca057df457a985eb1401c6b9cc8fa88785410d912c04"
+    },
+    {
+      "bytes": 24224,
+      "classification": "public_candidate",
+      "path": "tests/test_release_evidence.py",
+      "sha256": "0872563135032d6ecfa5454fc282f09fc94770b8d304658323965d909267368a"
+    },
+    {
+      "bytes": 650,
+      "classification": "public_candidate",
+      "path": "tests/test_scaffold.py",
+      "sha256": "0a09fe35cef4007365374073a923c61297bf006f66b621929898eacbdff04043"
+    },
+    {
+      "bytes": 13058,
+      "classification": "public_candidate",
+      "path": "tests/test_security_core.py",
+      "sha256": "fc04c22aa785158b20e1a62a53c035bdc1f3f88a94709964563be40ca6e795fc"
+    },
+    {
+      "bytes": 10078,
+      "classification": "public_candidate",
+      "path": "tests/test_transport.py",
+      "sha256": "634bee3b61dcce50bdb39a4e6138374c1e4b49d70f21172d2e8f03dd4be43fdd"
+    },
+    {
+      "bytes": 34046,
+      "classification": "public_candidate",
+      "path": "tests/test_transport_remediation.py",
+      "sha256": "ad575ffc33f0a1bc01c53158a152dd423f39fb96b09b2a0fc6db1fc04372f305"
+    }
+  ],
+  "private_path_policy": {
+    "list_file": ".private-paths",
+    "policy": "Paths named in a local private-path list are excluded from this manifest and from every export; the list itself is private."
+  },
+  "schema_version": 1,
+  "self_hash_policy": "manifest lists itself with null SHA-256 and null size because both are recursive; every other listed file is hashed and sized",
+  "status": "approved_public_alpha"
+}

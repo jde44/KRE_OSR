@@ -1,0 +1,35 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+.venv/
+venv/
+logs/
+*.log
+*.jsonl
+*.pem
+*.key
+*.p12
+
+# Models, runtime binaries, local state, and potentially recoverable prompts
+models/
+weights/
+runtime/
+data/
+*.gguf
+*.safetensors
+*.bin
+*.slot
+
+# Local private-path list (never published)
+.private-paths

@@ -1,0 +1,974 @@
+{
+  "catalog_schema_version": 2,
+  "catalog_sha256": "5a9552a982ddc5783331f6bcc787ddf2d4da06d737713239bcd2849c496f7ff6",
+  "environment": {
+    "implementation": "CPython",
+    "machine": "arm64",
+    "os": "Darwin",
+    "python": "3.14.5",
+    "sandbox_safe": false
+  },
+  "evaluations": [
+    {
+      "absent_tests": [],
+      "disposition": "pass",
+      "due_point": "Before each release candidate",
+      "evidence": "Raw unittest outcome and provider call count",
+      "id": "ADV-AUTH",
+      "owner": "KRE Open Sovereign Router security owner",
+      "purpose": "Reject auth bypass and malformed key attempts without execution",
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 4.4e-05,
+          "status": "pass",
+          "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_auth_bypass_and_timing_inputs_fail_closed"
+        }
+      ],
+      "remediation": "Block the release candidate; fix authentication test-first",
+      "tests": [
+        "test_auth_bypass_and_timing_inputs_fail_closed"
+      ],
+      "threshold": "All mapped tests pass with zero provider calls"
+    },
+    {
+      "absent_tests": [],
+      "disposition": "pass",
+      "due_point": "Before each release candidate",
+      "evidence": "Per-field service outcome",
+      "id": "ADV-SPOOF",
+      "owner": "KRE Open Sovereign Router security owner",
+      "purpose": "Reject actor, sensitivity, provider and endpoint spoofing",
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 0.000202,
+          "status": "pass",
+          "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_actor_and_sensitivity_spoofing_is_rejected"
+        }
+      ],
+      "remediation": "Block the release candidate; restore server-owned identity and routing fields",
+      "tests": [
+        "test_actor_and_sensitivity_spoofing_is_rejected"
+      ],
+      "threshold": "All mapped tests pass with zero unauthorized execution"
+    },
+    {
+      "absent_tests": [],
+      "disposition": "pass",
+      "due_point": "Before each release candidate",
+      "evidence": "Verifier exceptions, race result and pending-store assertions",
+      "id": "ADV-APPROVAL",
+      "owner": "KRE Open Sovereign Router security owner",
+      "purpose": "Reject forged, tampered, expired and replayed approvals, including race and restore edges",
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 0.000526,
+          "status": "pass",
+          "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_approval_forgery_tamper_expiry_and_replay"
+        },
+        {
+          "detail": "",
+          "seconds": 0.004936,
+          "status": "pass",
+          "test_id": "test_security_core.ApprovalTests.test_replay_consume_is_thread_safe"
+        },
+        {
+          "detail": "",
+          "seconds": 0.00658,
+          "status": "pass",
+          "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_concurrent_resubmissions_execute_exactly_once"
+        },
+        {
+          "detail": "",
+          "seconds": 2.1e-05,
+          "status": "pass",
+          "test_id": "test_transport_remediation.PendingStoreInvariantTests.test_restore_never_exceeds_caps"
+        }
+      ],
+      "remediation": "Block the release candidate; repair binding, atomicity or expiry test-first",
+      "tests": [
+        "test_approval_forgery_tamper_expiry_and_replay",
+        "test_replay_consume_is_thread_safe",
+        "test_concurrent_resubmissions_execute_exactly_once",
+        "test_restore_never_exceeds_caps"
+      ],
+      "threshold": "All mapped tests pass; exactly one racing approval executes"
+    },
+    {
+      "absent_tests": [],
+      "disposition": "pass",
+      "due_point": "Before each release candidate",
+      "evidence": "Capacity and audit outcomes",
+      "id": "ADV-PENDING",
+      "owner": "KRE Open Sovereign Router security owner",
+      "purpose": "Bound pending-store exhaustion per actor and globally",
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 0.000754,
+          "status": "pass",
+          "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_per_actor_quota_prevents_queue_monopoly"
+        },
+        {
+          "detail": "",
+          "seconds": 0.000113,
+          "status": "pass",
+          "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_queue_full_is_audited_as_such"
+        }
+      ],
+      "remediation": "Block the release candidate; repair quota or restore behavior",
+      "tests": [
+        "test_per_actor_quota_prevents_queue_monopoly",
+        "test_queue_full_is_audited_as_such"
+      ],
+      "threshold": "All mapped quota and audit tests pass"
+    },
+    {
+      "absent_tests": [],
+      "disposition": "pass",
+      "due_point": "Before each release candidate",
+      "evidence": "Structured rejection, provider call counts and socket outcomes",
+      "id": "ADV-PROTOCOL",
+      "owner": "KRE Open Sovereign Router security owner",
+      "purpose": "Reject malformed, deep, nonfinite, duplicate, oversized and ambiguous protocol inputs",
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 2.5e-05,
+          "status": "pass",
+          "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_duplicate_json_members_are_rejected"
+        },
+        {
+          "detail": "",
+          "seconds": 7.1e-05,
+          "status": "pass",
+          "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_malformed_shapes_and_bounds_do_not_execute"
+        },
+        {
+          "detail": "",
+          "seconds": 0.510275,
+          "status": "pass",
+          "test_id": "test_transport_remediation.SocketHardeningTests.test_duplicate_security_headers_are_rejected"
+        },
+        {
+          "detail": "",
+          "seconds": 0.625039,
+          "status": "pass",
+          "test_id": "test_transport_remediation.SocketHardeningTests.test_nested_and_non_finite_json_get_structured_errors"
+        }
+      ],
+      "remediation": "Block the release candidate; make parsing unambiguous and bounded",
+      "tests": [
+        "test_malformed_shapes_and_bounds_do_not_execute",
+        "test_duplicate_json_members_are_rejected",
+        "test_nested_and_non_finite_json_get_structured_errors",
+        "test_duplicate_security_headers_are_rejected"
+      ],
+      "threshold": "All mapped tests pass with zero provider calls on rejected inputs"
+    },
+    {
+      "absent_tests": [],
+      "disposition": "pass",
+      "due_point": "Before each release candidate",
+      "evidence": "Raw HTTP status, provider call and audit outcomes",
+      "id": "ADV-HOST",
+      "owner": "KRE Open Sovereign Router security owner",
+      "purpose": "Reject Host, Content-Length and Transfer-Encoding tricks",
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 0.515525,
+          "status": "pass",
+          "test_id": "test_transport_remediation.SocketDeadlineAndParsingTests.test_strict_content_length_and_host_port"
+        },
+        {
+          "detail": "",
+          "seconds": 0.510275,
+          "status": "pass",
+          "test_id": "test_transport_remediation.SocketHardeningTests.test_duplicate_security_headers_are_rejected"
+        },
+        {
+          "detail": "",
+          "seconds": 0.506631,
+          "status": "pass",
+          "test_id": "test_transport_remediation.SocketHardeningTests.test_non_loopback_host_header_is_rejected"
+        }
+      ],
+      "remediation": "Block the release candidate; harden header validation",
+      "tests": [
+        "test_non_loopback_host_header_is_rejected",
+        "test_strict_content_length_and_host_port",
+        "test_duplicate_security_headers_are_rejected"
+      ],
+      "threshold": "All mapped raw HTTP cases reject before provider execution"
+    },
+    {
+      "absent_tests": [],
+      "disposition": "pass",
+      "due_point": "Before each release candidate",
+      "evidence": "Elapsed time, 408/503 outcomes and slot recovery",
+      "id": "ADV-DOS",
+      "owner": "KRE Open Sovereign Router security owner",
+      "purpose": "Bound slow-drip, idle and connection exhaustion behavior",
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 2.060965,
+          "status": "pass",
+          "test_id": "test_transport_remediation.SocketDeadlineAndParsingTests.test_header_drip_cannot_hold_slots_past_read_deadline"
+        },
+        {
+          "detail": "",
+          "seconds": 0.810912,
+          "status": "pass",
+          "test_id": "test_transport_remediation.SocketHardeningTests.test_connection_cap_rejects_excess_connections"
+        },
+        {
+          "detail": "",
+          "seconds": 0.809647,
+          "status": "pass",
+          "test_id": "test_transport_remediation.SocketHardeningTests.test_idle_connections_time_out"
+        }
+      ],
+      "remediation": "Block the release candidate or document accepted localhost-only residual",
+      "tests": [
+        "test_header_drip_cannot_hold_slots_past_read_deadline",
+        "test_idle_connections_time_out",
+        "test_connection_cap_rejects_excess_connections"
+      ],
+      "threshold": "All mapped timeout and slot-recovery tests pass"
+    },
+    {
+      "absent_tests": [],
+      "disposition": "pass",
+      "due_point": "Before each release candidate",
+      "evidence": "Audit-unavailable outcomes, provider counts and response scan",
+      "id": "ADV-AUDIT",
+      "owner": "KRE Open Sovereign Router security owner",
+      "purpose": "Fail closed on audit defects and prevent log injection or prompt leakage",
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 0.000798,
+          "status": "pass",
+          "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_audit_failure_and_log_injection_fail_closed_without_prompt"
+        },
+        {
+          "detail": "",
+          "seconds": 0.000162,
+          "status": "pass",
+          "test_id": "test_transport_remediation.AuditCompletenessTests.test_blocked_decision_audit_failure_fails_closed"
+        },
+        {
+          "detail": "",
+          "seconds": 7.6e-05,
+          "status": "pass",
+          "test_id": "test_transport_remediation.AuditCompletenessTests.test_outcome_audit_failure_withholds_provider_content"
+        }
+      ],
+      "remediation": "Block the release candidate; restore fail-closed audit path",
+      "tests": [
+        "test_audit_failure_and_log_injection_fail_closed_without_prompt",
+        "test_blocked_decision_audit_failure_fails_closed",
+        "test_outcome_audit_failure_withholds_provider_content"
+      ],
+      "threshold": "All mapped tests pass with no leaked input"
+    },
+    {
+      "absent_tests": [],
+      "disposition": "pass",
+      "due_point": "Before each release candidate",
+      "evidence": "Bounded generic errors and audit outcomes",
+      "id": "ADV-PROVIDER",
+      "owner": "KRE Open Sovereign Router security owner",
+      "purpose": "Contain provider exceptions, substitution, invalid output, output bounds and elapsed timeout",
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 0.000781,
+          "status": "pass",
+          "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_provider_elapsed_timeout_is_rejected"
+        },
+        {
+          "detail": "",
+          "seconds": 0.000411,
+          "status": "pass",
+          "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_provider_exception_substitution_output_bound_and_timeout"
+        },
+        {
+          "detail": "",
+          "seconds": 0.000141,
+          "status": "pass",
+          "test_id": "test_transport_remediation.ProviderIntegrityTests.test_provider_model_substitution_is_rejected"
+        },
+        {
+          "detail": "",
+          "seconds": 0.000115,
+          "status": "pass",
+          "test_id": "test_transport_remediation.ProviderIntegrityTests.test_unexpected_provider_exception_is_contained"
+        }
+      ],
+      "remediation": "Block the release candidate; contain adapter and preserve selected route",
+      "tests": [
+        "test_provider_exception_substitution_output_bound_and_timeout",
+        "test_provider_model_substitution_is_rejected",
+        "test_unexpected_provider_exception_is_contained",
+        "test_provider_elapsed_timeout_is_rejected"
+      ],
+      "threshold": "All mapped tests return bounded errors without alternate execution"
+    },
+    {
+      "absent_tests": [],
+      "disposition": "pass",
+      "due_point": "Before each release candidate",
+      "evidence": "Provider-unavailable or blocked result",
+      "id": "ADV-FALLBACK",
+      "owner": "KRE Open Sovereign Router security owner",
+      "purpose": "Prohibit silent provider fallback",
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 5.8e-05,
+          "status": "pass",
+          "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_no_silent_fallback_when_provider_missing"
+        },
+        {
+          "detail": "",
+          "seconds": 4.6e-05,
+          "status": "pass",
+          "test_id": "test_security_core.PolicyAndAuditTests.test_no_silent_fallback"
+        }
+      ],
+      "remediation": "Block the release candidate; remove implicit fallback",
+      "tests": [
+        "test_no_silent_fallback_when_provider_missing",
+        "test_no_silent_fallback"
+      ],
+      "threshold": "All mapped tests show no alternate provider execution"
+    },
+    {
+      "absent_tests": [],
+      "disposition": "pass",
+      "due_point": "Before each release candidate",
+      "evidence": "Serialized response and audit scans",
+      "id": "ADV-LEAK",
+      "owner": "KRE Open Sovereign Router security owner",
+      "purpose": "Prevent request-ID, secret, error-detail and prompt leakage",
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 0.000164,
+          "status": "pass",
+          "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_instruction_override_and_unicode_are_opaque_data"
+        },
+        {
+          "detail": "",
+          "seconds": 8.1e-05,
+          "status": "pass",
+          "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_request_id_and_error_do_not_echo_attacker_data"
+        }
+      ],
+      "remediation": "Block the release candidate; redact and bound returned fields",
+      "tests": [
+        "test_request_id_and_error_do_not_echo_attacker_data",
+        "test_instruction_override_and_unicode_are_opaque_data"
+      ],
+      "threshold": "All mapped response and audit scans contain no protected markers"
+    },
+    {
+      "absent_tests": [],
+      "disposition": "pass",
+      "due_point": "Before each release candidate",
+      "evidence": "Policy route, bounded response and reflection scan",
+      "id": "ADV-OPAQUE",
+      "owner": "KRE Open Sovereign Router security owner",
+      "purpose": "Treat Unicode, control characters and instruction-override text as opaque message data",
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 0.000164,
+          "status": "pass",
+          "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_instruction_override_and_unicode_are_opaque_data"
+        }
+      ],
+      "remediation": "Block the release candidate; separate data from authority channels",
+      "tests": [
+        "test_instruction_override_and_unicode_are_opaque_data"
+      ],
+      "threshold": "All mapped tests preserve policy authority and do not reflect input"
+    }
+  ],
+  "excluded_test_modules": [
+    "test_release_evidence"
+  ],
+  "generated_at_utc": "2026-11-10T21:37:51Z",
+  "mapping": {
+    "allowed_skips": [],
+    "mapped_outcome_count": 28,
+    "metadata_gaps": [],
+    "total_outcome_count": 91,
+    "unallowed_skips": []
+  },
+  "raw_outcomes": [
+    {
+      "detail": "",
+      "seconds": 0.000202,
+      "status": "pass",
+      "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_actor_and_sensitivity_spoofing_is_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000526,
+      "status": "pass",
+      "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_approval_forgery_tamper_expiry_and_replay"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000798,
+      "status": "pass",
+      "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_audit_failure_and_log_injection_fail_closed_without_prompt"
+    },
+    {
+      "detail": "",
+      "seconds": 4.4e-05,
+      "status": "pass",
+      "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_auth_bypass_and_timing_inputs_fail_closed"
+    },
+    {
+      "detail": "",
+      "seconds": 2.5e-05,
+      "status": "pass",
+      "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_duplicate_json_members_are_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000164,
+      "status": "pass",
+      "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_instruction_override_and_unicode_are_opaque_data"
+    },
+    {
+      "detail": "",
+      "seconds": 7.1e-05,
+      "status": "pass",
+      "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_malformed_shapes_and_bounds_do_not_execute"
+    },
+    {
+      "detail": "",
+      "seconds": 5.8e-05,
+      "status": "pass",
+      "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_no_silent_fallback_when_provider_missing"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000781,
+      "status": "pass",
+      "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_provider_elapsed_timeout_is_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000411,
+      "status": "pass",
+      "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_provider_exception_substitution_output_bound_and_timeout"
+    },
+    {
+      "detail": "",
+      "seconds": 8.1e-05,
+      "status": "pass",
+      "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_request_id_and_error_do_not_echo_attacker_data"
+    },
+    {
+      "detail": "",
+      "seconds": 5.4e-05,
+      "status": "pass",
+      "test_id": "test_adversarial_runner.RunnerGateTests.test_counts_distinguish_mapped_and_total"
+    },
+    {
+      "detail": "",
+      "seconds": 9.1e-05,
+      "status": "pass",
+      "test_id": "test_adversarial_runner.RunnerGateTests.test_full_gate_allows_scoped_capability_skip_and_reports_it"
+    },
+    {
+      "detail": "",
+      "seconds": 2.3e-05,
+      "status": "pass",
+      "test_id": "test_adversarial_runner.RunnerGateTests.test_full_gate_rejects_absent_mapping"
+    },
+    {
+      "detail": "",
+      "seconds": 2.1e-05,
+      "status": "pass",
+      "test_id": "test_adversarial_runner.RunnerGateTests.test_full_gate_rejects_catalog_metadata_gap"
+    },
+    {
+      "detail": "",
+      "seconds": 8.5e-05,
+      "status": "pass",
+      "test_id": "test_adversarial_runner.RunnerGateTests.test_full_gate_rejects_unallowlisted_skip"
+    },
+    {
+      "detail": "",
+      "seconds": 0.004787,
+      "status": "pass",
+      "test_id": "test_candidate_manifest.TopLevelBoundaryAndProhibitedArtifactTests.test_no_prohibited_candidate_artifacts"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000377,
+      "status": "pass",
+      "test_id": "test_candidate_manifest.TopLevelBoundaryAndProhibitedArtifactTests.test_top_level_boundary_is_deliberately_classified"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000211,
+      "status": "pass",
+      "test_id": "test_scaffold.ScaffoldTests.test_apache_license_is_adopted"
+    },
+    {
+      "detail": "",
+      "seconds": 1.5e-05,
+      "status": "pass",
+      "test_id": "test_scaffold.ScaffoldTests.test_package_identity"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000287,
+      "status": "pass",
+      "test_id": "test_security_core.ApprovalTests.test_expiry_boundary_and_max_ttl"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000788,
+      "status": "pass",
+      "test_id": "test_security_core.ApprovalTests.test_field_by_field_tampering_is_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000264,
+      "status": "pass",
+      "test_id": "test_security_core.ApprovalTests.test_forged_replayed_expired_and_malformed_tokens"
+    },
+    {
+      "detail": "",
+      "seconds": 9.1e-05,
+      "status": "pass",
+      "test_id": "test_security_core.ApprovalTests.test_id_nonce_and_hash_bounds"
+    },
+    {
+      "detail": "",
+      "seconds": 0.004936,
+      "status": "pass",
+      "test_id": "test_security_core.ApprovalTests.test_replay_consume_is_thread_safe"
+    },
+    {
+      "detail": "",
+      "seconds": 3.9e-05,
+      "status": "pass",
+      "test_id": "test_security_core.ApprovalTests.test_secret_strength_at_issuer_and_verifier"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000113,
+      "status": "pass",
+      "test_id": "test_security_core.PolicyAndAuditTests.test_audit_actor_cannot_be_substituted_by_caller"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000271,
+      "status": "pass",
+      "test_id": "test_security_core.PolicyAndAuditTests.test_audit_derives_verified_approval_and_has_no_content_fields"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000181,
+      "status": "pass",
+      "test_id": "test_security_core.PolicyAndAuditTests.test_internal_cloud_semantics_require_approval"
+    },
+    {
+      "detail": "",
+      "seconds": 5.7e-05,
+      "status": "pass",
+      "test_id": "test_security_core.PolicyAndAuditTests.test_malformed_sensitivity_of_all_types_fails_restricted"
+    },
+    {
+      "detail": "",
+      "seconds": 4.6e-05,
+      "status": "pass",
+      "test_id": "test_security_core.PolicyAndAuditTests.test_no_silent_fallback"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000171,
+      "status": "pass",
+      "test_id": "test_security_core.PolicyAndAuditTests.test_payload_hash_and_all_routing_fields_are_bound"
+    },
+    {
+      "detail": "",
+      "seconds": 0.00017,
+      "status": "pass",
+      "test_id": "test_security_core.PolicyAndAuditTests.test_smallest_capable_local_and_routing_edges"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000235,
+      "status": "pass",
+      "test_id": "test_security_core.RegistryAndEndpointTests.test_global_ipv4_and_ipv6_cloud_literals_are_allowed_when_allowlisted"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000113,
+      "status": "pass",
+      "test_id": "test_security_core.RegistryAndEndpointTests.test_registry_identifiers_and_version_are_bounded"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000104,
+      "status": "pass",
+      "test_id": "test_security_core.RegistryAndEndpointTests.test_registry_is_defensively_copied_and_immutable"
+    },
+    {
+      "detail": "",
+      "seconds": 2.1e-05,
+      "status": "pass",
+      "test_id": "test_security_core.RegistryAndEndpointTests.test_unknown_model_provider_reference_is_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000288,
+      "status": "pass",
+      "test_id": "test_security_core.RegistryAndEndpointTests.test_unsafe_and_normalization_edge_endpoints_are_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000257,
+      "status": "pass",
+      "test_id": "test_transport.ServiceControlTests.test_concurrency_limit_rejects_second_request"
+    },
+    {
+      "detail": "",
+      "seconds": 0.001029,
+      "status": "pass",
+      "test_id": "test_transport.ServiceControlTests.test_file_audit_sink_is_prompt_free_and_owner_only"
+    },
+    {
+      "detail": "",
+      "seconds": 0.0001,
+      "status": "pass",
+      "test_id": "test_transport.ServiceControlTests.test_service_audit_failure_is_fail_closed"
+    },
+    {
+      "detail": "",
+      "seconds": 8.9e-05,
+      "status": "pass",
+      "test_id": "test_transport.ServiceControlTests.test_service_auth_health_models_and_chat"
+    },
+    {
+      "detail": "",
+      "seconds": 6.2e-05,
+      "status": "pass",
+      "test_id": "test_transport.ServiceControlTests.test_service_provider_failure_is_redacted"
+    },
+    {
+      "detail": "",
+      "seconds": 7.3e-05,
+      "status": "pass",
+      "test_id": "test_transport.ServiceControlTests.test_service_rejects_spoof_stream_bad_model_and_oversized_message"
+    },
+    {
+      "detail": "",
+      "seconds": 0.517109,
+      "status": "pass",
+      "test_id": "test_transport.TransportIntegrationTests.test_actor_and_sensitivity_spoofing_are_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.505211,
+      "status": "pass",
+      "test_id": "test_transport.TransportIntegrationTests.test_audit_failure_blocks_provider_and_errors_are_structured"
+    },
+    {
+      "detail": "",
+      "seconds": 0.508791,
+      "status": "pass",
+      "test_id": "test_transport.TransportIntegrationTests.test_health_models_and_chat_require_auth_and_do_not_leak_key"
+    },
+    {
+      "detail": "",
+      "seconds": 1.006489,
+      "status": "pass",
+      "test_id": "test_transport.TransportIntegrationTests.test_malformed_oversized_streaming_and_model_override"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000397,
+      "status": "pass",
+      "test_id": "test_transport.TransportIntegrationTests.test_non_loopback_bind_is_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.504357,
+      "status": "pass",
+      "test_id": "test_transport.TransportIntegrationTests.test_provider_error_is_bounded_and_redacted"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000818,
+      "status": "pass",
+      "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_bindings_match_an_independently_computed_expectation"
+    },
+    {
+      "detail": "",
+      "seconds": 0.00658,
+      "status": "pass",
+      "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_concurrent_resubmissions_execute_exactly_once"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000287,
+      "status": "pass",
+      "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_header_level_approval_rejections_are_audited"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000725,
+      "status": "pass",
+      "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_max_tokens_change_between_phases_is_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.130585,
+      "status": "pass",
+      "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_other_actor_cannot_disturb_a_pending_request"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000183,
+      "status": "pass",
+      "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_pending_expiry_uses_monotonic_clock"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000754,
+      "status": "pass",
+      "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_per_actor_quota_prevents_queue_monopoly"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000113,
+      "status": "pass",
+      "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_queue_full_is_audited_as_such"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000105,
+      "status": "pass",
+      "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_unexpected_sink_exception_fails_closed_as_audit_unavailable"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000162,
+      "status": "pass",
+      "test_id": "test_transport_remediation.AuditCompletenessTests.test_blocked_decision_audit_failure_fails_closed"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000132,
+      "status": "pass",
+      "test_id": "test_transport_remediation.AuditCompletenessTests.test_blocked_decisions_are_audited"
+    },
+    {
+      "detail": "",
+      "seconds": 7.6e-05,
+      "status": "pass",
+      "test_id": "test_transport_remediation.AuditCompletenessTests.test_outcome_audit_failure_withholds_provider_content"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000151,
+      "status": "pass",
+      "test_id": "test_transport_remediation.AuditCompletenessTests.test_success_and_failure_outcomes_are_audited"
+    },
+    {
+      "detail": "",
+      "seconds": 6.8e-05,
+      "status": "pass",
+      "test_id": "test_transport_remediation.PendingStoreInvariantTests.test_approver_sees_requested_output_budget"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000311,
+      "status": "pass",
+      "test_id": "test_transport_remediation.PendingStoreInvariantTests.test_eviction_is_strictly_insertion_ordered_under_tied_clock"
+    },
+    {
+      "detail": "",
+      "seconds": 2.1e-05,
+      "status": "pass",
+      "test_id": "test_transport_remediation.PendingStoreInvariantTests.test_restore_never_exceeds_caps"
+    },
+    {
+      "detail": "",
+      "seconds": 7.8e-05,
+      "status": "pass",
+      "test_id": "test_transport_remediation.ProviderIntegrityTests.test_non_result_provider_return_is_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000141,
+      "status": "pass",
+      "test_id": "test_transport_remediation.ProviderIntegrityTests.test_provider_model_substitution_is_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000115,
+      "status": "pass",
+      "test_id": "test_transport_remediation.ProviderIntegrityTests.test_unexpected_provider_exception_is_contained"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000129,
+      "status": "pass",
+      "test_id": "test_transport_remediation.RequestStrictnessTests.test_capability_must_be_a_true_integer"
+    },
+    {
+      "detail": "",
+      "seconds": 9e-05,
+      "status": "pass",
+      "test_id": "test_transport_remediation.RequestStrictnessTests.test_unsupported_fields_are_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 2.00539,
+      "status": "pass",
+      "test_id": "test_transport_remediation.SocketDeadlineAndParsingTests.test_authenticated_body_drip_is_cut_at_read_deadline"
+    },
+    {
+      "detail": "",
+      "seconds": 2.060965,
+      "status": "pass",
+      "test_id": "test_transport_remediation.SocketDeadlineAndParsingTests.test_header_drip_cannot_hold_slots_past_read_deadline"
+    },
+    {
+      "detail": "",
+      "seconds": 0.506366,
+      "status": "pass",
+      "test_id": "test_transport_remediation.SocketDeadlineAndParsingTests.test_ipv6_loopback_bind"
+    },
+    {
+      "detail": "",
+      "seconds": 0.515525,
+      "status": "pass",
+      "test_id": "test_transport_remediation.SocketDeadlineAndParsingTests.test_strict_content_length_and_host_port"
+    },
+    {
+      "detail": "",
+      "seconds": 0.810912,
+      "status": "pass",
+      "test_id": "test_transport_remediation.SocketHardeningTests.test_connection_cap_rejects_excess_connections"
+    },
+    {
+      "detail": "",
+      "seconds": 0.510275,
+      "status": "pass",
+      "test_id": "test_transport_remediation.SocketHardeningTests.test_duplicate_security_headers_are_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.809647,
+      "status": "pass",
+      "test_id": "test_transport_remediation.SocketHardeningTests.test_idle_connections_time_out"
+    },
+    {
+      "detail": "",
+      "seconds": 0.625039,
+      "status": "pass",
+      "test_id": "test_transport_remediation.SocketHardeningTests.test_nested_and_non_finite_json_get_structured_errors"
+    },
+    {
+      "detail": "",
+      "seconds": 0.506631,
+      "status": "pass",
+      "test_id": "test_transport_remediation.SocketHardeningTests.test_non_loopback_host_header_is_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.507247,
+      "status": "pass",
+      "test_id": "test_transport_remediation.SocketHardeningTests.test_two_phase_approval_over_http"
+    },
+    {
+      "detail": "",
+      "seconds": 0.507845,
+      "status": "pass",
+      "test_id": "test_transport_remediation.SocketHardeningTests.test_unauthenticated_post_is_rejected_before_body_is_read"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000996,
+      "status": "pass",
+      "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_approval_failure_detail_is_not_echoed_but_is_audited"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000803,
+      "status": "pass",
+      "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_approve_then_execute_once"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000834,
+      "status": "pass",
+      "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_consumed_request_cannot_be_reapproved_with_new_nonce"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000552,
+      "status": "pass",
+      "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_expired_pending_entries_free_capacity"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000537,
+      "status": "pass",
+      "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_other_actor_cannot_use_pending_request"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000778,
+      "status": "pass",
+      "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_payload_change_between_phases_is_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000732,
+      "status": "pass",
+      "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_pending_request_expires"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000484,
+      "status": "pass",
+      "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_pending_store_is_bounded"
+    },
+    {
+      "detail": "",
+      "seconds": 0.001056,
+      "status": "pass",
+      "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_request_reference_and_token_must_be_paired"
+    }
+  ],
+  "schema_version": 1,
+  "source_sha256": "3ac25d7e24e9cbaced402d45ffd0e24b21c72ca153ab2d66ed38291935f5dc08",
+  "summary": {
+    "disposition": "pass",
+    "error": 0,
+    "fail": 0,
+    "pass": 91,
+    "seconds": 12.586155,
+    "skip": 0,
+    "total": 91
+  },
+  "threshold": "All applicable evaluations pass; zero unauthorized provider calls or prompt leakage"
+}

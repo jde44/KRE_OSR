@@ -1,0 +1,167 @@
+{
+  "assumptions": {
+    "baseline": "Every completed non-sensitive (public/internal) task would otherwise use a hypothetical cloud-large route. Sensitive and refused tasks are excluded from the economic comparison.",
+    "latency_method": "Deterministic policy operation count; not wall-clock model latency.",
+    "prices_usd_per_1m_tokens": {
+      "cloud-advanced": 4.0,
+      "cloud-large": 10.0,
+      "local": 0.0
+    },
+    "token_method": "Declared synthetic token budgets, not tokenizer measurements."
+  },
+  "checks": {
+    "local_completion_rate": true,
+    "selection_accuracy": true,
+    "sensitive_leak_rate": true,
+    "unauthorized_cloud_rate": true
+  },
+  "disposition": "pass",
+  "economics": {
+    "baseline_cost_usd": 0.067,
+    "baseline_tokens_declared": 6700,
+    "comparison_set": [
+      "t01",
+      "t02",
+      "t05",
+      "t06",
+      "t11"
+    ],
+    "estimated_cost_difference_usd": 0.0598,
+    "excluded_blocked": [
+      "t09"
+    ],
+    "excluded_sensitive": [
+      "t03",
+      "t04",
+      "t07",
+      "t08",
+      "t10"
+    ],
+    "note": "Reported, not gated: local price is a disclosed 0 assumption and token budgets are declared fixtures, so a savings threshold could not fail meaningfully.",
+    "routed_cost_usd": 0.0072,
+    "routed_tokens_declared": 4500
+  },
+  "environment": {
+    "hardware": "policy-only; hardware-independent",
+    "python": ">=3.10"
+  },
+  "executes_model": false,
+  "fixture_sha256": "c93807393cfccbeac14496a4e6dff5e591ef86b5900894443c53ac61ed2b2a2b",
+  "latency": {
+    "kind": "deterministic_operation_count_proxy",
+    "unit": "routing_decisions",
+    "value": 11,
+    "wall_clock_model_latency_measured": false
+  },
+  "limitations": [
+    "No model inference or quality evaluation is performed.",
+    "Token counts and prices are disclosed synthetic assumptions, not observed billing.",
+    "Cost results exclude hardware, energy, operations and provider-price changes.",
+    "The latency proxy is not a performance or end-to-end latency claim."
+  ],
+  "metrics": {
+    "approved_cloud_routes": 1,
+    "local_completion_rate": 0.7272727272727273,
+    "selection_accuracy": 1.0,
+    "sensitive_leak_rate": 0.0,
+    "unauthorized_cloud_rate": 0.0
+  },
+  "outcomes": [
+    {
+      "actual": "local-basic",
+      "approval_verified": false,
+      "expected": "local-basic",
+      "id": "t01",
+      "provider": "local",
+      "status": "selected"
+    },
+    {
+      "actual": "local-basic",
+      "approval_verified": false,
+      "expected": "local-basic",
+      "id": "t02",
+      "provider": "local",
+      "status": "selected"
+    },
+    {
+      "actual": "local-basic",
+      "approval_verified": false,
+      "expected": "local-basic",
+      "id": "t03",
+      "provider": "local",
+      "status": "selected"
+    },
+    {
+      "actual": "local-basic",
+      "approval_verified": false,
+      "expected": "local-basic",
+      "id": "t04",
+      "provider": "local",
+      "status": "selected"
+    },
+    {
+      "actual": "local-standard",
+      "approval_verified": false,
+      "expected": "local-standard",
+      "id": "t05",
+      "provider": "local",
+      "status": "selected"
+    },
+    {
+      "actual": "local-standard",
+      "approval_verified": false,
+      "expected": "local-standard",
+      "id": "t06",
+      "provider": "local",
+      "status": "selected"
+    },
+    {
+      "actual": "local-standard",
+      "approval_verified": false,
+      "expected": "local-standard",
+      "id": "t07",
+      "provider": "local",
+      "status": "selected"
+    },
+    {
+      "actual": "local-standard",
+      "approval_verified": false,
+      "expected": "local-standard",
+      "id": "t08",
+      "provider": "local",
+      "status": "selected"
+    },
+    {
+      "actual": "approval_required",
+      "approval_verified": false,
+      "expected": "approval_required",
+      "id": "t09",
+      "provider": "cloud",
+      "status": "blocked"
+    },
+    {
+      "actual": "sensitive_local_unavailable",
+      "approval_verified": false,
+      "expected": "sensitive_local_unavailable",
+      "id": "t10",
+      "provider": null,
+      "status": "blocked"
+    },
+    {
+      "actual": "cloud-advanced",
+      "approval_verified": true,
+      "expected": "cloud-advanced",
+      "id": "t11",
+      "provider": "cloud",
+      "status": "selected"
+    }
+  ],
+  "schema_version": 2,
+  "synthetic": true,
+  "thresholds": {
+    "local_completion_rate_min": 0.6,
+    "selection_accuracy_min": 1.0,
+    "sensitive_leak_rate_max": 0.0,
+    "unauthorized_cloud_rate_max": 0.0
+  }
+}
