@@ -7,10 +7,10 @@
       "sha256": "511472fc91659755e9499de89d7440247d3d157afa9144b147cd2fa7ccc77dee"
     },
     {
-      "bytes": 1661,
+      "bytes": 2433,
       "classification": "public_candidate",
       "path": "CHANGELOG.md",
-      "sha256": "12371bfe4beba9a338c83b284f0d5cdb4de804be9a39e5c6da9bac4835b54c72"
+      "sha256": "1552ac99689e872d9a9d286384b3b4b9e0a7220a30caec242e469b5af816b4c1"
     },
     {
       "bytes": 578,
@@ -49,10 +49,10 @@
       "sha256": "a336c62c025dfc5f6e89b3e7124c64146e37df7200fecdfd7bf1deb021aa0510"
     },
     {
-      "bytes": 4349,
+      "bytes": 5254,
       "classification": "public_candidate",
       "path": "README.md",
-      "sha256": "9d3a7f34a58aefd5356d88a9cc023c27f307f5c5bf81d38e246d8f3934cde0cb"
+      "sha256": "f00a4de566d1869d1be6b646f977f3218c9a03a80dd9b94727a3d4f74ceab729"
     },
     {
       "bytes": 1009,
@@ -79,6 +79,12 @@
       "sha256": "4783f0625a2a4ccfe36aef1d536d08e5b6b7c962e90f92e806739276b6ce51b3"
     },
     {
+      "bytes": 7518,
+      "classification": "public_candidate",
+      "path": "docs/DEMO_UI.md",
+      "sha256": "c9133d36f17022650a5dbb1066f052ad11aadda2598d7ef6637d47a7dba1d81b"
+    },
+    {
       "bytes": 7674,
       "classification": "public_candidate",
       "path": "docs/LOCALHOST_TRANSPORT.md",
@@ -97,10 +103,10 @@
       "sha256": "5b73b8441b3561338d2ffe2ca97bf114b35437a7c6f140b570d94fd190b6cb3d"
     },
     {
-      "bytes": 3635,
+      "bytes": 3722,
       "classification": "public_candidate",
       "path": "docs/REPRODUCIBILITY.md",
-      "sha256": "502715fcc627744f01c451b0a8952147bb7abdf620fdfe994200ae1249bfd17d"
+      "sha256": "497b76e91baa720dd975432ea0df771fb6e7179f241c5b1b94b19d0cc210ef5f"
     },
     {
       "bytes": 2545,
@@ -139,16 +145,16 @@
       "sha256": "c93807393cfccbeac14496a4e6dff5e591ef86b5900894443c53ac61ed2b2a2b"
     },
     {
-      "bytes": 34104,
+      "bytes": 39178,
       "classification": "public_candidate",
       "path": "evals/results/adversarial-full.json",
-      "sha256": "5185d7dce429096f753a40a0e7438f1e1f4a04630b30e2e9bbae5c66cd0563c3"
+      "sha256": "238f9201a01a89c9479b6e467d18bedc9797b68e9d9eef3129e0797f22c5b18a"
     },
     {
-      "bytes": 29459,
+      "bytes": 34383,
       "classification": "public_candidate",
       "path": "evals/results/adversarial-sandbox.json",
-      "sha256": "fa8a460f4062ee8557f0e9152cd598be09a651452f580b803995c23964db6767"
+      "sha256": "3dd2c9a1d2acdaa48bc6057f9f0ccc9b63cecaef0dd6f44f89b23dece27d099a"
     },
     {
       "bytes": 4552,
@@ -163,10 +169,10 @@
       "sha256": "c56c813b2986ed2102b41b655d7ae174bf40676a0c7184069d7bca3bbea5e4f2"
     },
     {
-      "bytes": 833,
+      "bytes": 2471,
       "classification": "public_candidate",
       "path": "release/dependency-lock.json",
-      "sha256": "822e7f836bbb6fdd73af3ffd60fc4f278f762814543ad129251a83043a70c59d"
+      "sha256": "fb9731da8d11722433d83c649220fb83953b3857f7b0a4fa693f5f02a491c77b"
     },
     {
       "bytes": null,
@@ -191,6 +197,42 @@
       "classification": "public_candidate",
       "path": "scripts/demo.sh",
       "sha256": "a69f10ce4d20b44a72d1ace0c783261a5d04910667b7cb39cea234a02091ddfb"
+    },
+    {
+      "bytes": 7444,
+      "classification": "public_candidate",
+      "path": "scripts/demo_ui/e2e_check.py",
+      "sha256": "6c47f4b00310aa6669dae29b74850634677c6ef8806ab71088ae3d96b31fa726"
+    },
+    {
+      "bytes": 22492,
+      "classification": "public_candidate",
+      "path": "scripts/demo_ui/server.py",
+      "sha256": "900f9f7e8da7d2b2b5ca5d45ed18f01afbe71002a62ed12a664797a82af5dd29"
+    },
+    {
+      "bytes": 15239,
+      "classification": "public_candidate",
+      "path": "scripts/demo_ui/static/app.js",
+      "sha256": "627a7f577db1f5c5d42409aeb0a92ba18c1f2d8e6d344aa5342729623b66303b"
+    },
+    {
+      "bytes": 6675,
+      "classification": "public_candidate",
+      "path": "scripts/demo_ui/static/index.html",
+      "sha256": "c00ad7ef4e4fb5f3ad37987a708c6045a6b058274c37abc757bd18d1ba7357d0"
+    },
+    {
+      "bytes": 7816,
+      "classification": "public_candidate",
+      "path": "scripts/demo_ui/static/styles.css",
+      "sha256": "3b746a79917af9ae68d7f3a68b5c9902cbac60eb0c1164f4dcc1d602be7869ac"
+    },
+    {
+      "bytes": 374,
+      "classification": "public_candidate",
+      "path": "scripts/demo_ui.sh",
+      "sha256": "f1b394843211a41ae5826d07e2502752fc32ec9a2c913dcb9c0cce4514e77b05"
     },
     {
       "bytes": 3350,
@@ -311,6 +353,12 @@
       "classification": "public_candidate",
       "path": "tests/test_candidate_manifest.py",
       "sha256": "7d9f6a9fa7ec9bfeb804ca057df457a985eb1401c6b9cc8fa88785410d912c04"
+    },
+    {
+      "bytes": 17483,
+      "classification": "public_candidate",
+      "path": "tests/test_demo_ui.py",
+      "sha256": "bdb26f107c91debf172ded96aba0f7d3da4ea0d8a956133a1bb178750a643edc"
     },
     {
       "bytes": 24224,

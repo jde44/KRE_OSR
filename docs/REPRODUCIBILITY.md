@@ -5,7 +5,7 @@
 - Python: 3.10 or newer; tested on 3.10, 3.11 and 3.13.
 - Runtime dependencies: Python standard library only.
 - Build metadata: PEP 517 with `setuptools>=68,<76`; validation does not fetch or install it.
-- Dependency lock: `release/dependency-lock.json`. Runtime and test dependency lists are empty. The release build backend is pinned to `setuptools==75.9.1`; its wheel size and SHA-256 were matched to official PyPI metadata and it was unpacked and import-tested offline.
+- Dependency lock: `release/dependency-lock.json`. Runtime and test dependency lists are empty; Playwright is listed only as an optional developer tool for the demo UI browser check. The release build backend is pinned to `setuptools==75.9.1`; its wheel size and SHA-256 were matched to official PyPI metadata and it was unpacked and import-tested offline.
 - Network: not required for setup, tests, benchmark, manifest, SBOM or scans.
 - Demo: requires permission to bind an ephemeral IPv4 loopback socket.
 
