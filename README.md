@@ -36,6 +36,14 @@ Python 3.10+ is required. Runtime code and validation use only the Python standa
 
 The demo binds an ephemeral `127.0.0.1` port, calls the real development HTTP transport, and uses `FakeProvider`; it does not contact a model or external service. Some managed sandboxes prohibit loopback binding, so run it in a normal local shell when that occurs.
 
+### Browser demo for reviewers
+
+```bash
+./scripts/demo_ui.sh
+```
+
+Open the URL it prints (it includes a per-launch token). Pick a preset or write a synthetic request, choose a sensitivity, capability and output-token budget, and the page shows the model the router selects and why, the approval step for cloud routes, sensitive requests kept local or blocked, labelled estimates and the prompt-free audit events. It uses only the standard library, the real localhost transport and `FakeProvider`, and makes no external requests. See [the demo UI guide](docs/DEMO_UI.md) for the walkthrough, security boundaries and limitations.
+
 ## Architecture
 
 ```text
@@ -44,6 +52,8 @@ authenticated local caller -> localhost transport -> deterministic policy
                                             |-> cloud route blocked unless enabled + one-request approval
                                             `-> prompt-free audit events
 ```
+
+The optional browser demo (`scripts/demo_ui/`) sits in front of this as a loopback-only adapter: it forwards each synthetic request to the same transport and renders what the router returns, without making routing decisions in the browser.
 
 The policy selects the smallest capable enabled model, prefers local execution, blocks cloud for confidential/restricted classifications, and never silently falls back across a provider boundary.
 
@@ -55,6 +65,7 @@ The policy selects the smallest capable enabled model, prefers local execution, 
 - [Exact candidate manifest](release/public-candidate-manifest.json)
 - [SPDX SBOM](release/sbom.spdx.json)
 - [Security policy](SECURITY.md)
+- [Local demo UI](docs/DEMO_UI.md)
 
 The benchmark tests routing logic only. It does not run a model or establish response quality, production cost, wall-clock model latency, energy use, security certification, or superiority over another router. Outbound cloud transport, durable approvals/audit integrity, secret lifecycle, multi-tenancy, production availability, and robust sensitive-content detection remain out of scope.
 

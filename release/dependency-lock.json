@@ -14,5 +14,28 @@
     "source": "https://pypi.org/project/setuptools/75.9.1/",
     "verification": "Downloaded from the official PyPI file URL, SHA-256 and size matched PyPI metadata, unpacked offline, and imported as setuptools 75.9.1. The wheel is not bundled."
   },
-  "test_dependencies": []
+  "test_dependencies": [],
+  "optional_developer_tools": [
+    {
+      "name": "playwright",
+      "ecosystem": "PyPI",
+      "version": "1.63.0",
+      "license": "Apache-2.0",
+      "requires_python": ">=3.10",
+      "used_by": "scripts/demo_ui/e2e_check.py only (optional browser check and screenshots for the local demo UI)",
+      "installed_by_setup": false,
+      "required_by_tests": false,
+      "bundled": false,
+      "source": "https://pypi.org/project/playwright/1.63.0/",
+      "wheel_sha256": {
+        "playwright-1.63.0-py3-none-manylinux1_x86_64.whl": "ad21bc07516b187965a7521c5cf0df0bd657b17482eaad74335272d35a2b07de",
+        "playwright-1.63.0-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl": "354e15b29503565fc598b89f16fbe070459343bef9d7498a93e304864000c6a7",
+        "playwright-1.63.0-py3-none-macosx_11_0_arm64.whl": "fd1aa00631d44d55e56e0975bf3f3f285fac4a9fd2813183f0c12a488f1a1b24",
+        "playwright-1.63.0-py3-none-macosx_10_13_x86_64.whl": "84c540759e8e7f01e690e197e04060f48899d37cea322299f255843273d3385d",
+        "playwright-1.63.0-py3-none-win_amd64.whl": "2f9a707a6c6c91157ed77bff2b8caeb04b3c8d46e70d585fc134298cbe4b5cc6"
+      },
+      "verification": "SHA-256 values copied from official PyPI metadata for 1.63.0. Install with pip --require-hashes if used. Playwright also downloads a browser build, which is a developer-machine prerequisite and is not part of the candidate.",
+      "security_rationale": "Dev-only, never imported by src/, the demo server or the release suite. It drives a local Chromium against the loopback demo server and the check fails if the page requests any non-loopback host."
+    }
+  ]
 }

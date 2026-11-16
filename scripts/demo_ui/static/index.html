@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Open Sovereign Router · Local demo</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#request-heading">Skip to the demo</a>
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">Open Sovereign Router · local demo</p>
+      <h1>See how each request is routed, and why</h1>
+      <p class="lede">Local-first routing, explicit single-request cloud approval and prompt-free audit, running entirely on this machine.</p>
+    </div>
+    <ul class="badges" aria-label="Demo boundaries">
+      <li>Local-only</li>
+      <li>Synthetic data</li>
+      <li>FakeProvider</li>
+      <li>No network</li>
+    </ul>
+  </header>
+
+  <p id="connection-status" class="banner" role="status" aria-live="polite">Connecting to the local router…</p>
+
+  <main class="layout">
+    <section class="card request" aria-labelledby="request-heading">
+      <h2 id="request-heading" tabindex="-1">1 · Request</h2>
+
+      <fieldset class="presets">
+        <legend>Preset scenarios</legend>
+        <div id="preset-list" class="preset-list"></div>
+      </fieldset>
+
+      <form id="request-form" novalidate>
+        <label for="message">Synthetic request text</label>
+        <textarea id="message" name="message" rows="4" maxlength="2000" required aria-describedby="message-help message-count"></textarea>
+        <p id="message-help" class="help">Use synthetic text only. Never enter real, personal or client data.</p>
+        <p id="message-count" class="help count" aria-live="off">0 / 2000</p>
+
+        <fieldset class="sensitivity">
+          <legend>Data sensitivity</legend>
+          <div class="radio-row">
+            <label><input type="radio" name="sensitivity" value="public" checked> Public</label>
+            <label><input type="radio" name="sensitivity" value="internal"> Internal</label>
+            <label><input type="radio" name="sensitivity" value="confidential"> Confidential</label>
+            <label><input type="radio" name="sensitivity" value="restricted"> Restricted</label>
+          </div>
+        </fieldset>
+
+        <div class="field-row">
+          <div>
+            <label for="capability">Required capability</label>
+            <select id="capability" name="capability">
+              <option value="basic">Basic</option>
+              <option value="standard">Standard</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+          <div>
+            <label for="max-tokens">Output-token budget</label>
+            <input id="max-tokens" name="max_tokens" type="number" min="1" max="2048" step="1" value="128" inputmode="numeric" required>
+          </div>
+        </div>
+
+        <p id="form-error" class="error" role="alert" hidden></p>
+        <div class="actions">
+          <button id="run-button" type="submit" class="primary">Run routing policy</button>
+          <button id="reset-button" type="button" class="secondary">Reset demo</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="results" aria-labelledby="results-heading">
+      <h2 id="results-heading" class="visually-hidden">Results</h2>
+
+      <ol id="flow" class="flow" aria-label="Routing flow">
+        <li data-step="classify"><span class="step-name">Classified</span><span class="step-state">waiting</span></li>
+        <li data-step="policy"><span class="step-name">Policy evaluated</span><span class="step-state">waiting</span></li>
+        <li data-step="route"><span class="step-name">Route</span><span class="step-state">waiting</span></li>
+        <li data-step="audit"><span class="step-name">Audited</span><span class="step-state">waiting</span></li>
+      </ol>
+
+      <div class="grid">
+        <article class="card" aria-labelledby="classification-heading">
+          <h2 id="classification-heading">2 · Classification</h2>
+          <dl id="classification" class="facts"><div><dt>Status</dt><dd>Run a request to see its classification.</dd></div></dl>
+        </article>
+
+        <article class="card" aria-labelledby="models-heading">
+          <h2 id="models-heading">3 · Available models</h2>
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">Models the router can choose from</caption>
+              <thead><tr><th scope="col">Model</th><th scope="col">Where</th><th scope="col">Capability</th><th scope="col">Synthetic price</th></tr></thead>
+              <tbody id="model-rows"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card decision" aria-labelledby="decision-heading">
+          <h2 id="decision-heading">4 · Decision</h2>
+          <div id="decision" aria-live="polite">
+            <p class="placeholder">No request yet.</p>
+          </div>
+        </article>
+
+        <article class="card" aria-labelledby="approval-heading">
+          <h2 id="approval-heading">5 · Cloud approval</h2>
+          <div id="approval" aria-live="polite">
+            <p class="placeholder">Cloud routes need explicit approval for each request. Nothing to approve yet.</p>
+          </div>
+        </article>
+
+        <article class="card" aria-labelledby="estimate-heading">
+          <h2 id="estimate-heading">6 · Estimate</h2>
+          <div id="estimate"><p class="placeholder">Estimates appear after a decision.</p></div>
+        </article>
+
+        <article class="card audit" aria-labelledby="audit-heading">
+          <h2 id="audit-heading">7 · Audit evidence</h2>
+          <p class="help">Metadata only. The audit schema has no field for prompt or response text.</p>
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">Audit events, newest first</caption>
+              <thead><tr><th scope="col">Time (UTC)</th><th scope="col">Request</th><th scope="col">Phase</th><th scope="col">Result</th><th scope="col">Route</th><th scope="col">Approved</th></tr></thead>
+              <tbody id="audit-rows"><tr><td colspan="6" class="placeholder">No events yet.</td></tr></tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Open Sovereign Router is an open-source project from KRE Solution Engineering, licensed under Apache-2.0. Alpha demonstration: not production-ready. Estimates use synthetic assumptions and are not measurements.</p>
+  </footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>

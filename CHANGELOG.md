@@ -14,6 +14,11 @@ All notable changes are recorded here.
 
 - Release-candidate controls: adversarial results must match the current source and catalog; an allowlisted export that refuses on scan findings, stale evidence or a missing private list; private development records excluded from the candidate.
 
+## Unreleased
+
+- Added a local-only browser demo for reviewers (`./scripts/demo_ui.sh`, `docs/DEMO_UI.md`). A standard-library adapter bound to loopback forwards synthetic requests to the existing authenticated transport with `FakeProvider`, and the page renders the router's decision, explanation, single-request approval flow, labelled estimates and prompt-free audit. Per-launch UI token, Host check, strict CSP, bounded input, no external requests. No change to the routing policy, approvals, transport or audit.
+- Added `tests/test_demo_ui.py` (standard library) and an optional Playwright browser check (`scripts/demo_ui/e2e_check.py`); Playwright is recorded as an optional developer tool in `release/dependency-lock.json` and is not a runtime or test dependency.
+
 ## Earlier development
 
 - Deterministic adversarial evaluation and duplicate-input hardening.

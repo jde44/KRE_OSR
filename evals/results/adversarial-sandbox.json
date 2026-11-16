@@ -3,9 +3,9 @@
   "catalog_sha256": "5a9552a982ddc5783331f6bcc787ddf2d4da06d737713239bcd2849c496f7ff6",
   "environment": {
     "implementation": "CPython",
-    "machine": "arm64",
-    "os": "Darwin",
-    "python": "3.14.5",
+    "machine": "x86_64",
+    "os": "Linux",
+    "python": "3.13.18",
     "sandbox_safe": true
   },
   "evaluations": [
@@ -20,7 +20,7 @@
       "raw_outcomes": [
         {
           "detail": "",
-          "seconds": 5.3e-05,
+          "seconds": 9.6e-05,
           "status": "pass",
           "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_auth_bypass_and_timing_inputs_fail_closed"
         }
@@ -42,7 +42,7 @@
       "raw_outcomes": [
         {
           "detail": "",
-          "seconds": 0.000249,
+          "seconds": 0.000347,
           "status": "pass",
           "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_actor_and_sensitivity_spoofing_is_rejected"
         }
@@ -64,25 +64,25 @@
       "raw_outcomes": [
         {
           "detail": "",
-          "seconds": 0.000553,
+          "seconds": 0.000765,
           "status": "pass",
           "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_approval_forgery_tamper_expiry_and_replay"
         },
         {
           "detail": "",
-          "seconds": 0.004356,
+          "seconds": 0.006017,
           "status": "pass",
           "test_id": "test_security_core.ApprovalTests.test_replay_consume_is_thread_safe"
         },
         {
           "detail": "",
-          "seconds": 0.001595,
+          "seconds": 0.004431,
           "status": "pass",
           "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_concurrent_resubmissions_execute_exactly_once"
         },
         {
           "detail": "",
-          "seconds": 2.8e-05,
+          "seconds": 4.6e-05,
           "status": "pass",
           "test_id": "test_transport_remediation.PendingStoreInvariantTests.test_restore_never_exceeds_caps"
         }
@@ -107,13 +107,13 @@
       "raw_outcomes": [
         {
           "detail": "",
-          "seconds": 0.000992,
+          "seconds": 0.00118,
           "status": "pass",
           "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_per_actor_quota_prevents_queue_monopoly"
         },
         {
           "detail": "",
-          "seconds": 0.000112,
+          "seconds": 0.000172,
           "status": "pass",
           "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_queue_full_is_audited_as_such"
         }
@@ -139,13 +139,13 @@
       "raw_outcomes": [
         {
           "detail": "",
-          "seconds": 3.2e-05,
+          "seconds": 6.6e-05,
           "status": "pass",
           "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_duplicate_json_members_are_rejected"
         },
         {
           "detail": "",
-          "seconds": 7.7e-05,
+          "seconds": 0.000172,
           "status": "pass",
           "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_malformed_shapes_and_bounds_do_not_execute"
         }
@@ -162,7 +162,6 @@
     {
       "absent_tests": [
         "test_duplicate_security_headers_are_rejected",
-        "test_non_loopback_host_header_is_rejected",
         "test_strict_content_length_and_host_port"
       ],
       "disposition": "not_run",
@@ -171,7 +170,14 @@
       "id": "ADV-HOST",
       "owner": "KRE Open Sovereign Router security owner",
       "purpose": "Reject Host, Content-Length and Transfer-Encoding tricks",
-      "raw_outcomes": [],
+      "raw_outcomes": [
+        {
+          "detail": "",
+          "seconds": 1.002342,
+          "status": "pass",
+          "test_id": "test_demo_ui.BoundaryTests.test_non_loopback_host_header_is_rejected"
+        }
+      ],
       "remediation": "Block the release candidate; harden header validation",
       "tests": [
         "test_non_loopback_host_header_is_rejected",
@@ -212,19 +218,19 @@
       "raw_outcomes": [
         {
           "detail": "",
-          "seconds": 0.000569,
+          "seconds": 0.000278,
           "status": "pass",
           "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_audit_failure_and_log_injection_fail_closed_without_prompt"
         },
         {
           "detail": "",
-          "seconds": 0.000172,
+          "seconds": 0.000193,
           "status": "pass",
           "test_id": "test_transport_remediation.AuditCompletenessTests.test_blocked_decision_audit_failure_fails_closed"
         },
         {
           "detail": "",
-          "seconds": 9.5e-05,
+          "seconds": 0.000132,
           "status": "pass",
           "test_id": "test_transport_remediation.AuditCompletenessTests.test_outcome_audit_failure_withholds_provider_content"
         }
@@ -248,25 +254,25 @@
       "raw_outcomes": [
         {
           "detail": "",
-          "seconds": 0.000495,
+          "seconds": 0.000863,
           "status": "pass",
           "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_provider_elapsed_timeout_is_rejected"
         },
         {
           "detail": "",
-          "seconds": 0.000239,
+          "seconds": 0.000524,
           "status": "pass",
           "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_provider_exception_substitution_output_bound_and_timeout"
         },
         {
           "detail": "",
-          "seconds": 0.000135,
+          "seconds": 0.000132,
           "status": "pass",
           "test_id": "test_transport_remediation.ProviderIntegrityTests.test_provider_model_substitution_is_rejected"
         },
         {
           "detail": "",
-          "seconds": 8.9e-05,
+          "seconds": 0.000129,
           "status": "pass",
           "test_id": "test_transport_remediation.ProviderIntegrityTests.test_unexpected_provider_exception_is_contained"
         }
@@ -291,13 +297,13 @@
       "raw_outcomes": [
         {
           "detail": "",
-          "seconds": 9.9e-05,
+          "seconds": 0.000136,
           "status": "pass",
           "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_no_silent_fallback_when_provider_missing"
         },
         {
           "detail": "",
-          "seconds": 5.8e-05,
+          "seconds": 0.000129,
           "status": "pass",
           "test_id": "test_security_core.PolicyAndAuditTests.test_no_silent_fallback"
         }
@@ -320,13 +326,13 @@
       "raw_outcomes": [
         {
           "detail": "",
-          "seconds": 0.000204,
+          "seconds": 0.000326,
           "status": "pass",
           "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_instruction_override_and_unicode_are_opaque_data"
         },
         {
           "detail": "",
-          "seconds": 5e-05,
+          "seconds": 0.000114,
           "status": "pass",
           "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_request_id_and_error_do_not_echo_attacker_data"
         }
@@ -349,7 +355,7 @@
       "raw_outcomes": [
         {
           "detail": "",
-          "seconds": 0.000204,
+          "seconds": 0.000326,
           "status": "pass",
           "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_instruction_override_and_unicode_are_opaque_data"
         }
@@ -364,470 +370,626 @@
   "excluded_test_modules": [
     "test_release_evidence"
   ],
-  "generated_at_utc": "2026-11-10T21:37:56Z",
+  "generated_at_utc": "2026-11-10T23:42:16Z",
   "mapping": {
     "allowed_skips": [],
-    "mapped_outcome_count": 21,
+    "mapped_outcome_count": 22,
     "metadata_gaps": [],
-    "total_outcome_count": 74,
+    "total_outcome_count": 100,
     "unallowed_skips": []
   },
   "raw_outcomes": [
     {
       "detail": "",
-      "seconds": 0.000249,
+      "seconds": 0.000347,
       "status": "pass",
       "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_actor_and_sensitivity_spoofing_is_rejected"
     },
     {
       "detail": "",
-      "seconds": 0.000553,
+      "seconds": 0.000765,
       "status": "pass",
       "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_approval_forgery_tamper_expiry_and_replay"
     },
     {
       "detail": "",
-      "seconds": 0.000569,
+      "seconds": 0.000278,
       "status": "pass",
       "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_audit_failure_and_log_injection_fail_closed_without_prompt"
     },
     {
       "detail": "",
-      "seconds": 5.3e-05,
+      "seconds": 9.6e-05,
       "status": "pass",
       "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_auth_bypass_and_timing_inputs_fail_closed"
     },
     {
       "detail": "",
-      "seconds": 3.2e-05,
+      "seconds": 6.6e-05,
       "status": "pass",
       "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_duplicate_json_members_are_rejected"
     },
     {
       "detail": "",
-      "seconds": 0.000204,
+      "seconds": 0.000326,
       "status": "pass",
       "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_instruction_override_and_unicode_are_opaque_data"
     },
     {
       "detail": "",
-      "seconds": 7.7e-05,
+      "seconds": 0.000172,
       "status": "pass",
       "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_malformed_shapes_and_bounds_do_not_execute"
     },
     {
       "detail": "",
-      "seconds": 9.9e-05,
+      "seconds": 0.000136,
       "status": "pass",
       "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_no_silent_fallback_when_provider_missing"
     },
     {
       "detail": "",
-      "seconds": 0.000495,
+      "seconds": 0.000863,
       "status": "pass",
       "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_provider_elapsed_timeout_is_rejected"
     },
     {
       "detail": "",
-      "seconds": 0.000239,
+      "seconds": 0.000524,
       "status": "pass",
       "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_provider_exception_substitution_output_bound_and_timeout"
     },
     {
       "detail": "",
-      "seconds": 5e-05,
+      "seconds": 0.000114,
       "status": "pass",
       "test_id": "test_adversarial_eval.AdversarialEvaluationTests.test_request_id_and_error_do_not_echo_attacker_data"
     },
     {
       "detail": "",
-      "seconds": 3.2e-05,
+      "seconds": 6.2e-05,
       "status": "pass",
       "test_id": "test_adversarial_runner.RunnerGateTests.test_counts_distinguish_mapped_and_total"
     },
     {
       "detail": "",
-      "seconds": 0.000111,
+      "seconds": 8.4e-05,
       "status": "pass",
       "test_id": "test_adversarial_runner.RunnerGateTests.test_full_gate_allows_scoped_capability_skip_and_reports_it"
     },
     {
       "detail": "",
-      "seconds": 3.9e-05,
+      "seconds": 4.2e-05,
       "status": "pass",
       "test_id": "test_adversarial_runner.RunnerGateTests.test_full_gate_rejects_absent_mapping"
     },
     {
       "detail": "",
-      "seconds": 6.5e-05,
+      "seconds": 4.7e-05,
       "status": "pass",
       "test_id": "test_adversarial_runner.RunnerGateTests.test_full_gate_rejects_catalog_metadata_gap"
     },
     {
       "detail": "",
-      "seconds": 2.9e-05,
+      "seconds": 4e-05,
       "status": "pass",
       "test_id": "test_adversarial_runner.RunnerGateTests.test_full_gate_rejects_unallowlisted_skip"
     },
     {
       "detail": "",
-      "seconds": 0.003933,
+      "seconds": 0.001532,
       "status": "pass",
       "test_id": "test_candidate_manifest.TopLevelBoundaryAndProhibitedArtifactTests.test_no_prohibited_candidate_artifacts"
     },
     {
       "detail": "",
-      "seconds": 0.000519,
+      "seconds": 0.000174,
       "status": "pass",
       "test_id": "test_candidate_manifest.TopLevelBoundaryAndProhibitedArtifactTests.test_top_level_boundary_is_deliberately_classified"
     },
     {
       "detail": "",
-      "seconds": 0.000446,
+      "seconds": 1.007443,
+      "status": "pass",
+      "test_id": "test_demo_ui.AuditAndPrivacyTests.test_audit_view_is_metadata_only"
+    },
+    {
+      "detail": "",
+      "seconds": 0.502764,
+      "status": "pass",
+      "test_id": "test_demo_ui.AuditAndPrivacyTests.test_route_response_never_echoes_the_message"
+    },
+    {
+      "detail": "",
+      "seconds": 1.002519,
+      "status": "pass",
+      "test_id": "test_demo_ui.BoundaryTests.test_api_requires_the_per_launch_token"
+    },
+    {
+      "detail": "",
+      "seconds": 1.002131,
+      "status": "pass",
+      "test_id": "test_demo_ui.BoundaryTests.test_demo_server_refuses_non_loopback_bind"
+    },
+    {
+      "detail": "",
+      "seconds": 1.013201,
+      "status": "pass",
+      "test_id": "test_demo_ui.BoundaryTests.test_full_walkthrough_makes_no_non_loopback_connection"
+    },
+    {
+      "detail": "",
+      "seconds": 1.002342,
+      "status": "pass",
+      "test_id": "test_demo_ui.BoundaryTests.test_non_loopback_host_header_is_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 0.501456,
+      "status": "pass",
+      "test_id": "test_demo_ui.BoundaryTests.test_only_allowlisted_static_files_are_served"
+    },
+    {
+      "detail": "",
+      "seconds": 1.002093,
+      "status": "pass",
+      "test_id": "test_demo_ui.BoundaryTests.test_security_headers_on_every_response"
+    },
+    {
+      "detail": "",
+      "seconds": 1.002098,
+      "status": "pass",
+      "test_id": "test_demo_ui.InputValidationTests.test_invalid_requests_are_rejected"
+    },
+    {
+      "detail": "",
+      "seconds": 1.002108,
+      "status": "pass",
+      "test_id": "test_demo_ui.InputValidationTests.test_oversized_malformed_and_chunked_bodies"
+    },
+    {
+      "detail": "",
+      "seconds": 0.503033,
+      "status": "pass",
+      "test_id": "test_demo_ui.PresetScenarioTests.test_confidential_preset_is_forced_local"
+    },
+    {
+      "detail": "",
+      "seconds": 0.507342,
+      "status": "pass",
+      "test_id": "test_demo_ui.PresetScenarioTests.test_public_cloud_route_requires_explicit_single_request_approval"
+    },
+    {
+      "detail": "",
+      "seconds": 1.003371,
+      "status": "pass",
+      "test_id": "test_demo_ui.PresetScenarioTests.test_public_low_complexity_routes_to_smallest_local_model"
+    },
+    {
+      "detail": "",
+      "seconds": 0.502575,
+      "status": "pass",
+      "test_id": "test_demo_ui.PresetScenarioTests.test_restricted_request_is_never_routed_to_cloud"
+    },
+    {
+      "detail": "",
+      "seconds": 0.505076,
+      "status": "pass",
+      "test_id": "test_demo_ui.RoutingControlTests.test_approval_cannot_be_moved_to_a_different_request"
+    },
+    {
+      "detail": "",
+      "seconds": 1.003754,
+      "status": "pass",
+      "test_id": "test_demo_ui.RoutingControlTests.test_approve_endpoint_requires_exactly_the_presented_bindings"
+    },
+    {
+      "detail": "",
+      "seconds": 0.502606,
+      "status": "pass",
+      "test_id": "test_demo_ui.RoutingControlTests.test_local_first_even_when_cloud_is_also_capable"
+    },
+    {
+      "detail": "",
+      "seconds": 0.503154,
+      "status": "pass",
+      "test_id": "test_demo_ui.RoutingControlTests.test_no_silent_fallback_when_cloud_needs_approval"
+    },
+    {
+      "detail": "",
+      "seconds": 1.506385,
+      "status": "pass",
+      "test_id": "test_demo_ui.RoutingControlTests.test_reset_gives_a_fresh_router_and_invalidates_pending_approvals"
+    },
+    {
+      "detail": "",
+      "seconds": 0.511745,
+      "status": "pass",
+      "test_id": "test_demo_ui.RoutingControlTests.test_sensitive_data_never_reaches_cloud_at_any_capability"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000935,
+      "status": "pass",
+      "test_id": "test_demo_ui.StaticFrontendTests.test_frontend_has_no_external_references"
+    },
+    {
+      "detail": "",
+      "seconds": 0.002355,
+      "status": "pass",
+      "test_id": "test_demo_ui.StaticFrontendTests.test_markup_is_labelled_and_keyboard_friendly"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000212,
+      "status": "pass",
+      "test_id": "test_demo_ui.StaticFrontendTests.test_script_never_builds_html_from_data"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000233,
+      "status": "pass",
+      "test_id": "test_demo_ui.StaticFrontendTests.test_server_only_opens_loopback_connections"
+    },
+    {
+      "detail": "",
+      "seconds": 0.010439,
+      "status": "pass",
+      "test_id": "test_demo_ui.StaticFrontendTests.test_server_uses_only_stdlib_and_the_router_package"
+    },
+    {
+      "detail": "",
+      "seconds": 0.000287,
+      "status": "pass",
+      "test_id": "test_demo_ui.StaticFrontendTests.test_styles_have_visible_focus_and_responsive_rules"
+    },
+    {
+      "detail": "",
+      "seconds": 9.7e-05,
       "status": "pass",
       "test_id": "test_scaffold.ScaffoldTests.test_apache_license_is_adopted"
     },
     {
       "detail": "",
-      "seconds": 8.4e-05,
+      "seconds": 4.1e-05,
       "status": "pass",
       "test_id": "test_scaffold.ScaffoldTests.test_package_identity"
     },
     {
       "detail": "",
-      "seconds": 0.00049,
+      "seconds": 0.000566,
       "status": "pass",
       "test_id": "test_security_core.ApprovalTests.test_expiry_boundary_and_max_ttl"
     },
     {
       "detail": "",
-      "seconds": 0.002046,
+      "seconds": 0.002221,
       "status": "pass",
       "test_id": "test_security_core.ApprovalTests.test_field_by_field_tampering_is_rejected"
     },
     {
       "detail": "",
-      "seconds": 0.000258,
+      "seconds": 0.000551,
       "status": "pass",
       "test_id": "test_security_core.ApprovalTests.test_forged_replayed_expired_and_malformed_tokens"
     },
     {
       "detail": "",
-      "seconds": 0.000278,
+      "seconds": 0.00023,
       "status": "pass",
       "test_id": "test_security_core.ApprovalTests.test_id_nonce_and_hash_bounds"
     },
     {
       "detail": "",
-      "seconds": 0.004356,
+      "seconds": 0.006017,
       "status": "pass",
       "test_id": "test_security_core.ApprovalTests.test_replay_consume_is_thread_safe"
     },
     {
       "detail": "",
-      "seconds": 3.9e-05,
+      "seconds": 9.4e-05,
       "status": "pass",
       "test_id": "test_security_core.ApprovalTests.test_secret_strength_at_issuer_and_verifier"
     },
     {
       "detail": "",
-      "seconds": 0.000124,
+      "seconds": 0.000261,
       "status": "pass",
       "test_id": "test_security_core.PolicyAndAuditTests.test_audit_actor_cannot_be_substituted_by_caller"
     },
     {
       "detail": "",
-      "seconds": 0.000172,
+      "seconds": 0.000445,
       "status": "pass",
       "test_id": "test_security_core.PolicyAndAuditTests.test_audit_derives_verified_approval_and_has_no_content_fields"
     },
     {
       "detail": "",
-      "seconds": 0.000197,
+      "seconds": 0.000301,
       "status": "pass",
       "test_id": "test_security_core.PolicyAndAuditTests.test_internal_cloud_semantics_require_approval"
     },
     {
       "detail": "",
-      "seconds": 6.7e-05,
+      "seconds": 0.000139,
       "status": "pass",
       "test_id": "test_security_core.PolicyAndAuditTests.test_malformed_sensitivity_of_all_types_fails_restricted"
     },
     {
       "detail": "",
-      "seconds": 5.8e-05,
+      "seconds": 0.000129,
       "status": "pass",
       "test_id": "test_security_core.PolicyAndAuditTests.test_no_silent_fallback"
     },
     {
       "detail": "",
-      "seconds": 0.000132,
+      "seconds": 0.000329,
       "status": "pass",
       "test_id": "test_security_core.PolicyAndAuditTests.test_payload_hash_and_all_routing_fields_are_bound"
     },
     {
       "detail": "",
-      "seconds": 5.6e-05,
+      "seconds": 0.000124,
       "status": "pass",
       "test_id": "test_security_core.PolicyAndAuditTests.test_smallest_capable_local_and_routing_edges"
     },
     {
       "detail": "",
-      "seconds": 0.000142,
+      "seconds": 0.000194,
       "status": "pass",
       "test_id": "test_security_core.RegistryAndEndpointTests.test_global_ipv4_and_ipv6_cloud_literals_are_allowed_when_allowlisted"
     },
     {
       "detail": "",
-      "seconds": 6.5e-05,
+      "seconds": 0.00013,
       "status": "pass",
       "test_id": "test_security_core.RegistryAndEndpointTests.test_registry_identifiers_and_version_are_bounded"
     },
     {
       "detail": "",
-      "seconds": 3e-05,
+      "seconds": 7.9e-05,
       "status": "pass",
       "test_id": "test_security_core.RegistryAndEndpointTests.test_registry_is_defensively_copied_and_immutable"
     },
     {
       "detail": "",
-      "seconds": 1.3e-05,
+      "seconds": 5.6e-05,
       "status": "pass",
       "test_id": "test_security_core.RegistryAndEndpointTests.test_unknown_model_provider_reference_is_rejected"
     },
     {
       "detail": "",
-      "seconds": 0.000237,
+      "seconds": 0.000521,
       "status": "pass",
       "test_id": "test_security_core.RegistryAndEndpointTests.test_unsafe_and_normalization_edge_endpoints_are_rejected"
     },
     {
       "detail": "",
-      "seconds": 0.000225,
+      "seconds": 0.000491,
       "status": "pass",
       "test_id": "test_transport.ServiceControlTests.test_concurrency_limit_rejects_second_request"
     },
     {
       "detail": "",
-      "seconds": 0.000979,
+      "seconds": 0.002041,
       "status": "pass",
       "test_id": "test_transport.ServiceControlTests.test_file_audit_sink_is_prompt_free_and_owner_only"
     },
     {
       "detail": "",
-      "seconds": 0.000125,
+      "seconds": 0.000289,
       "status": "pass",
       "test_id": "test_transport.ServiceControlTests.test_service_audit_failure_is_fail_closed"
     },
     {
       "detail": "",
-      "seconds": 0.000169,
+      "seconds": 0.000213,
       "status": "pass",
       "test_id": "test_transport.ServiceControlTests.test_service_auth_health_models_and_chat"
     },
     {
       "detail": "",
-      "seconds": 0.000148,
+      "seconds": 0.000195,
       "status": "pass",
       "test_id": "test_transport.ServiceControlTests.test_service_provider_failure_is_redacted"
     },
     {
       "detail": "",
-      "seconds": 0.000166,
+      "seconds": 0.00023,
       "status": "pass",
       "test_id": "test_transport.ServiceControlTests.test_service_rejects_spoof_stream_bad_model_and_oversized_message"
     },
     {
       "detail": "",
-      "seconds": 0.000111,
+      "seconds": 0.000477,
       "status": "pass",
       "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_bindings_match_an_independently_computed_expectation"
     },
     {
       "detail": "",
-      "seconds": 0.001595,
+      "seconds": 0.004431,
       "status": "pass",
       "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_concurrent_resubmissions_execute_exactly_once"
     },
     {
       "detail": "",
-      "seconds": 0.000129,
+      "seconds": 0.000171,
       "status": "pass",
       "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_header_level_approval_rejections_are_audited"
     },
     {
       "detail": "",
-      "seconds": 0.00031,
+      "seconds": 0.000334,
       "status": "pass",
       "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_max_tokens_change_between_phases_is_rejected"
     },
     {
       "detail": "",
-      "seconds": 0.083405,
+      "seconds": 0.083648,
       "status": "pass",
       "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_other_actor_cannot_disturb_a_pending_request"
     },
     {
       "detail": "",
-      "seconds": 0.000466,
+      "seconds": 0.000342,
       "status": "pass",
       "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_pending_expiry_uses_monotonic_clock"
     },
     {
       "detail": "",
-      "seconds": 0.000992,
+      "seconds": 0.00118,
       "status": "pass",
       "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_per_actor_quota_prevents_queue_monopoly"
     },
     {
       "detail": "",
-      "seconds": 0.000112,
+      "seconds": 0.000172,
       "status": "pass",
       "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_queue_full_is_audited_as_such"
     },
     {
       "detail": "",
-      "seconds": 0.000172,
+      "seconds": 0.000137,
       "status": "pass",
       "test_id": "test_transport_remediation.ApprovalStoreHardeningTests.test_unexpected_sink_exception_fails_closed_as_audit_unavailable"
     },
     {
       "detail": "",
-      "seconds": 0.000172,
+      "seconds": 0.000193,
       "status": "pass",
       "test_id": "test_transport_remediation.AuditCompletenessTests.test_blocked_decision_audit_failure_fails_closed"
     },
     {
       "detail": "",
-      "seconds": 0.000127,
+      "seconds": 0.000208,
       "status": "pass",
       "test_id": "test_transport_remediation.AuditCompletenessTests.test_blocked_decisions_are_audited"
     },
     {
       "detail": "",
-      "seconds": 9.5e-05,
+      "seconds": 0.000132,
       "status": "pass",
       "test_id": "test_transport_remediation.AuditCompletenessTests.test_outcome_audit_failure_withholds_provider_content"
     },
     {
       "detail": "",
-      "seconds": 0.000202,
+      "seconds": 0.000203,
       "status": "pass",
       "test_id": "test_transport_remediation.AuditCompletenessTests.test_success_and_failure_outcomes_are_audited"
     },
     {
       "detail": "",
-      "seconds": 7.3e-05,
+      "seconds": 0.000109,
       "status": "pass",
       "test_id": "test_transport_remediation.PendingStoreInvariantTests.test_approver_sees_requested_output_budget"
     },
     {
       "detail": "",
-      "seconds": 0.000395,
+      "seconds": 0.000502,
       "status": "pass",
       "test_id": "test_transport_remediation.PendingStoreInvariantTests.test_eviction_is_strictly_insertion_ordered_under_tied_clock"
     },
     {
       "detail": "",
-      "seconds": 2.8e-05,
+      "seconds": 4.6e-05,
       "status": "pass",
       "test_id": "test_transport_remediation.PendingStoreInvariantTests.test_restore_never_exceeds_caps"
     },
     {
       "detail": "",
-      "seconds": 0.00023,
+      "seconds": 0.000146,
       "status": "pass",
       "test_id": "test_transport_remediation.ProviderIntegrityTests.test_non_result_provider_return_is_rejected"
     },
     {
       "detail": "",
-      "seconds": 0.000135,
+      "seconds": 0.000132,
       "status": "pass",
       "test_id": "test_transport_remediation.ProviderIntegrityTests.test_provider_model_substitution_is_rejected"
     },
     {
       "detail": "",
-      "seconds": 8.9e-05,
+      "seconds": 0.000129,
       "status": "pass",
       "test_id": "test_transport_remediation.ProviderIntegrityTests.test_unexpected_provider_exception_is_contained"
     },
     {
       "detail": "",
-      "seconds": 9.5e-05,
+      "seconds": 0.00014,
       "status": "pass",
       "test_id": "test_transport_remediation.RequestStrictnessTests.test_capability_must_be_a_true_integer"
     },
     {
       "detail": "",
-      "seconds": 5.9e-05,
+      "seconds": 0.00013,
       "status": "pass",
       "test_id": "test_transport_remediation.RequestStrictnessTests.test_unsupported_fields_are_rejected"
     },
     {
       "detail": "",
-      "seconds": 0.000166,
+      "seconds": 0.000223,
       "status": "pass",
       "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_approval_failure_detail_is_not_echoed_but_is_audited"
     },
     {
       "detail": "",
-      "seconds": 0.000292,
+      "seconds": 0.000316,
       "status": "pass",
       "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_approve_then_execute_once"
     },
     {
       "detail": "",
-      "seconds": 0.000268,
+      "seconds": 0.000367,
       "status": "pass",
       "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_consumed_request_cannot_be_reapproved_with_new_nonce"
     },
     {
       "detail": "",
-      "seconds": 0.000261,
+      "seconds": 0.000157,
       "status": "pass",
       "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_expired_pending_entries_free_capacity"
     },
     {
       "detail": "",
-      "seconds": 0.00032,
+      "seconds": 0.000183,
       "status": "pass",
       "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_other_actor_cannot_use_pending_request"
     },
     {
       "detail": "",
-      "seconds": 0.000115,
+      "seconds": 0.000176,
       "status": "pass",
       "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_payload_change_between_phases_is_rejected"
     },
     {
       "detail": "",
-      "seconds": 0.000122,
+      "seconds": 0.000181,
       "status": "pass",
       "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_pending_request_expires"
     },
     {
       "detail": "",
-      "seconds": 0.000309,
+      "seconds": 0.000183,
       "status": "pass",
       "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_pending_store_is_bounded"
     },
     {
       "detail": "",
-      "seconds": 0.000279,
+      "seconds": 0.000381,
       "status": "pass",
       "test_id": "test_transport_remediation.TwoPhaseCloudApprovalTests.test_request_reference_and_token_must_be_paired"
     }
   ],
   "schema_version": 1,
-  "source_sha256": "3ac25d7e24e9cbaced402d45ffd0e24b21c72ca153ab2d66ed38291935f5dc08",
+  "source_sha256": "6c1930adea615c4107dd2c3598faedb96edcbb2832784de4a2192dcaa8410163",
   "summary": {
     "disposition": "pass_with_environment_gaps",
     "error": 0,
     "fail": 0,
-    "pass": 74,
-    "seconds": 0.113301,
+    "pass": 100,
+    "seconds": 16.222349,
     "skip": 0,
-    "total": 74
+    "total": 100
   },
   "threshold": "All applicable evaluations pass; zero unauthorized provider calls or prompt leakage"
 }
