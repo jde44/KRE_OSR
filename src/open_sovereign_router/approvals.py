@@ -19,7 +19,8 @@ _NONCE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$")
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 BINDING_FIELDS = (
     "version", "issuer", "request_id", "actor_id", "task", "required_capability",
-    "preferred_provider", "preferred_model", "payload_sha256", "sensitivity",
+    "preferred_provider", "preferred_model", "payload_sha256", "original_request_sha256",
+    "redaction_config_sha256", "output_budget", "sensitivity",
     "provider_id", "model_id", "policy_version", "registry_version",
 )
 
@@ -35,6 +36,9 @@ class ApprovalEnvelope:
     preferred_provider: str | None
     preferred_model: str | None
     payload_sha256: str
+    original_request_sha256: str
+    redaction_config_sha256: str
+    output_budget: int
     sensitivity: str
     provider_id: str
     model_id: str
@@ -50,7 +54,7 @@ class ApprovalEnvelope:
 
 
 def _validate(envelope: ApprovalEnvelope) -> None:
-    if envelope.version != 1:
+    if envelope.version != 2:
         raise ValueError("unsupported approval envelope version")
     for name in ("issuer", "request_id", "actor_id", "provider_id", "model_id", "policy_version", "registry_version"):
         if not isinstance(getattr(envelope, name), str) or not _ID.fullmatch(getattr(envelope, name)):
@@ -63,8 +67,11 @@ def _validate(envelope: ApprovalEnvelope) -> None:
         value = getattr(envelope, name)
         if value is not None and (not isinstance(value, str) or not _ID.fullmatch(value)):
             raise ValueError(f"invalid {name}")
-    if not isinstance(envelope.payload_sha256, str) or not _SHA256.fullmatch(envelope.payload_sha256):
-        raise ValueError("invalid payload SHA-256")
+    for name in ("payload_sha256", "original_request_sha256", "redaction_config_sha256"):
+        if not isinstance(getattr(envelope, name), str) or not _SHA256.fullmatch(getattr(envelope, name)):
+            raise ValueError(f"invalid {name}")
+    if not isinstance(envelope.output_budget, int) or isinstance(envelope.output_budget, bool) or not (1 <= envelope.output_budget <= 1_000_000):
+        raise ValueError("invalid output budget")
     if envelope.sensitivity not in {"public", "internal", "confidential", "restricted"}:
         raise ValueError("invalid sensitivity")
     if not isinstance(envelope.issued_at, int) or not isinstance(envelope.expires_at, int) or envelope.expires_at <= envelope.issued_at:

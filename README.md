@@ -11,6 +11,7 @@ Open Sovereign Router is an open-source project from KRE Solution Engineering fo
 - Explicit, single-request cloud escalation rather than silent fallback.
 - Provider-neutral adapters and explainable routing decisions.
 - Prompt-free audit metadata and synthetic, reproducible evaluation.
+- Bounded offline text inspection and irreversible redaction before provider execution.
 - Usable on ordinary hardware, beginning with llama.cpp-compatible local runtimes.
 
 ## Current state
@@ -19,6 +20,7 @@ Implemented and tested:
 
 - A deterministic local-first policy core: smallest capable model, local preference, hard local-only handling for confidential and restricted data, no silent fallback.
 - An authenticated, localhost-only, OpenAI-compatible development transport with two-phase, single-request cloud approval; connection, timeout and read-deadline limits; strict request parsing; and fail-closed, prompt-free audit of every decision and outcome.
+- Bounded offline inspection of supported message text. Findings force local-only handling; inspection failures block all providers; cloud approval binds both the exact outgoing payload and fingerprints of the original request and redaction configuration.
 - A deterministic adversarial evaluation catalog and runner (`docs/SECURITY_EVALUATION.md`).
 - Offline reproducibility tooling: a localhost fake-provider demo, an exact hashed candidate manifest, an SPDX 2.3 SBOM, public-candidate scans, a synthetic routing benchmark and an allowlisted export (`scripts/export_candidate.py`).
 
@@ -42,12 +44,13 @@ The demo binds an ephemeral `127.0.0.1` port, calls the real development HTTP tr
 ./scripts/demo_ui.sh
 ```
 
-Open the URL it prints (it includes a per-launch token). Pick a preset or write a synthetic request, choose a sensitivity, capability and output-token budget, and the page shows the model the router selects and why, the approval step for cloud routes, sensitive requests kept local or blocked, labelled estimates and the prompt-free audit events. It uses only the standard library, the real localhost transport and `FakeProvider`, and makes no external requests. See [the demo UI guide](docs/DEMO_UI.md) for the walkthrough, security boundaries and limitations.
+Open the URL it prints (it includes a per-launch token). Pick a preset or write a synthetic request, preview local redaction, then run the policy. The page shows the exact outgoing text before cloud approval, the selected model and reason, sensitive requests kept local or blocked, labelled estimates and prompt-free audit events. It uses only the standard library, the real localhost transport and `FakeProvider`, and makes no external requests. See [the demo UI guide](docs/DEMO_UI.md) for the walkthrough, security boundaries and limitations.
 
 ## Architecture
 
 ```text
 authenticated local caller -> localhost transport -> deterministic policy
+                                   | inspection/redaction (fail closed)
                                             |-> local FakeProvider (demo)
                                             |-> cloud route blocked unless enabled + one-request approval
                                             `-> prompt-free audit events
@@ -66,8 +69,9 @@ The policy selects the smallest capable enabled model, prefers local execution, 
 - [SPDX SBOM](release/sbom.spdx.json)
 - [Security policy](SECURITY.md)
 - [Local demo UI](docs/DEMO_UI.md)
+- [Data sovereignty and text controls](docs/DATA_SOVEREIGNTY.md)
 
-The benchmark tests routing logic only. It does not run a model or establish response quality, production cost, wall-clock model latency, energy use, security certification, or superiority over another router. Outbound cloud transport, durable approvals/audit integrity, secret lifecycle, multi-tenancy, production availability, and robust sensitive-content detection remain out of scope.
+The benchmark tests routing logic only. It does not run a model or establish response quality, production cost, wall-clock model latency, energy use, security certification, data-residency enforcement, or superiority over another router. The bounded detector is not comprehensive and zero findings never means cleared. Production endpoint/network/jurisdiction enforcement, durable approvals/audit integrity, key and secret lifecycle, retention and backups, multi-tenancy, administrative/support access and availability remain out of scope.
 
 ## Roadmap
 

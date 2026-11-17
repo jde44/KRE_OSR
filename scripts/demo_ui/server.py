@@ -148,6 +148,9 @@ class RouterBackend:
         finally:
             connection.close()
 
+    def preview(self, sensitivity, body):
+        return self.service.preview(self.caller_keys[sensitivity], body)
+
     def approve(self, bindings):
         """Signs exactly the bindings the router presented. Called only after an explicit human click in the UI."""
         if not isinstance(bindings, dict) or set(bindings) != set(BINDING_FIELDS):
@@ -269,6 +272,9 @@ class DemoApp:
         body = {"messages": [{"role": "user", "content": message}], "max_tokens": max_tokens,
                 "required_capability": int(CAPABILITIES[capability])}
         backend = self.backend
+        preview_status, preview = backend.preview(sensitivity, body)
+        if preview_status != 200:
+            raise DemoError(preview_status, preview.get("error", {}).get("message", "preview unavailable"))
         status, result = backend.forward(sensitivity, body, approval)
         error = result.get("error", {}) if isinstance(result, dict) else {}
         decision = {}
@@ -300,10 +306,22 @@ class DemoApp:
             "router_error": error.get("message") if outcome in ("blocked", "error") else None,
         }
         if approval_request:
+            approval_request["outgoing_messages"] = preview["messages"]
             response["approval_request"] = approval_request
         if status == 200:
             response["response_preview"] = result["choices"][0]["message"]["content"]
         return response
+
+    def preview(self, payload):
+        message, sensitivity, capability, max_tokens, approval = _validate_route(payload)
+        if approval is not None:
+            raise DemoError(400, "preview does not accept an approval")
+        body = {"messages": [{"role": "user", "content": message}], "max_tokens": max_tokens,
+                "required_capability": int(CAPABILITIES[capability])}
+        status, result = self.backend.preview(sensitivity, body)
+        if status != 200:
+            raise DemoError(status, result.get("error", {}).get("message", "preview unavailable"))
+        return result
 
 
 def _loopback_host(header):
@@ -397,6 +415,8 @@ def build_demo_server(app, host="127.0.0.1", port=0):
             try:
                 if path == "/demo/route":
                     return self._send(200, app.route(self._body()))
+                if path == "/demo/preview":
+                    return self._send(200, app.preview(self._body()))
                 if path == "/demo/approve":
                     payload = self._body()
                     if not isinstance(payload, dict) or set(payload) != {"bindings"}:

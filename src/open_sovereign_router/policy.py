@@ -43,6 +43,12 @@ class PolicyEngine:
         sensitivity = self.classifier.classify(server_sensitivity_label)
         if not isinstance(request.payload_sha256, str) or not _SHA256.fullmatch(request.payload_sha256):
             return self._blocked(request, sensitivity, "invalid_payload_digest", "canonical payload SHA-256 is required")
+        if not isinstance(request.original_request_sha256, str) or not _SHA256.fullmatch(request.original_request_sha256):
+            return self._blocked(request, sensitivity, "invalid_original_digest", "original request SHA-256 is required")
+        if not isinstance(request.redaction_config_sha256, str) or not _SHA256.fullmatch(request.redaction_config_sha256):
+            return self._blocked(request, sensitivity, "invalid_redaction_digest", "redaction configuration SHA-256 is required")
+        if not isinstance(request.output_budget, int) or isinstance(request.output_budget, bool) or request.output_budget < 1:
+            return self._blocked(request, sensitivity, "invalid_output_budget", "bounded output budget is required")
         if request.preferred_provider and request.preferred_provider not in self.registry.providers:
             return self._blocked(request, sensitivity, "unknown_provider", "requested provider is not registered")
         if request.preferred_model and request.preferred_model not in self.registry.models:
@@ -57,7 +63,7 @@ class PolicyEngine:
                 continue
             if request.preferred_model and model.model_id != request.preferred_model:
                 continue
-            if sensitivity in (Sensitivity.CONFIDENTIAL, Sensitivity.RESTRICTED) and provider.kind != "local":
+            if (request.force_local or sensitivity in (Sensitivity.CONFIDENTIAL, Sensitivity.RESTRICTED)) and provider.kind != "local":
                 continue
             candidates.append((provider, model))
 
@@ -65,7 +71,7 @@ class PolicyEngine:
         local = [pair for pair in candidates if pair[0].kind == "local"]
         selected = local[0] if local else (candidates[0] if candidates else None)
         if selected is None:
-            code = "sensitive_local_unavailable" if sensitivity in (Sensitivity.CONFIDENTIAL, Sensitivity.RESTRICTED) else "no_permitted_model"
+            code = "sensitive_local_unavailable" if request.force_local or sensitivity in (Sensitivity.CONFIDENTIAL, Sensitivity.RESTRICTED) else "no_permitted_model"
             return self._blocked(request, sensitivity, code, "no capable permitted model is available")
 
         provider, model = selected
@@ -91,7 +97,7 @@ class PolicyEngine:
 
     def _bindings(self, request: RoutingRequest, sensitivity: Sensitivity, provider_id: str, model_id: str) -> dict[str, object]:
         return {
-            "version": 1,
+            "version": 2,
             "issuer": self.approval_issuer,
             "request_id": request.request_id,
             "actor_id": request.actor_id,
@@ -100,6 +106,9 @@ class PolicyEngine:
             "preferred_provider": request.preferred_provider,
             "preferred_model": request.preferred_model,
             "payload_sha256": request.payload_sha256,
+            "original_request_sha256": request.original_request_sha256,
+            "redaction_config_sha256": request.redaction_config_sha256,
+            "output_budget": request.output_budget,
             "sensitivity": sensitivity.value,
             "provider_id": provider_id,
             "model_id": model_id,

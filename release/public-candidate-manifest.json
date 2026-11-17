@@ -49,10 +49,10 @@
       "sha256": "a336c62c025dfc5f6e89b3e7124c64146e37df7200fecdfd7bf1deb021aa0510"
     },
     {
-      "bytes": 5254,
+      "bytes": 5870,
       "classification": "public_candidate",
       "path": "README.md",
-      "sha256": "f00a4de566d1869d1be6b646f977f3218c9a03a80dd9b94727a3d4f74ceab729"
+      "sha256": "098de2504c935cc21ea957e8d153f136f2b1b79a266e2db8919955fa5c1f2920"
     },
     {
       "bytes": 1009,
@@ -79,10 +79,16 @@
       "sha256": "4783f0625a2a4ccfe36aef1d536d08e5b6b7c962e90f92e806739276b6ce51b3"
     },
     {
-      "bytes": 7518,
+      "bytes": 4178,
+      "classification": "public_candidate",
+      "path": "docs/DATA_SOVEREIGNTY.md",
+      "sha256": "ace4f09460999dbc83bbf059fcb1f1d8844debb33b721c76bdc503590c0d8e66"
+    },
+    {
+      "bytes": 8136,
       "classification": "public_candidate",
       "path": "docs/DEMO_UI.md",
-      "sha256": "c9133d36f17022650a5dbb1066f052ad11aadda2598d7ef6637d47a7dba1d81b"
+      "sha256": "6a393abd01a77557d8dee0c15d832e4fe86703b3778b1f7db9d8e8627166b024"
     },
     {
       "bytes": 7674,
@@ -145,16 +151,16 @@
       "sha256": "c93807393cfccbeac14496a4e6dff5e591ef86b5900894443c53ac61ed2b2a2b"
     },
     {
-      "bytes": 39178,
+      "bytes": 41177,
       "classification": "public_candidate",
       "path": "evals/results/adversarial-full.json",
-      "sha256": "238f9201a01a89c9479b6e467d18bedc9797b68e9d9eef3129e0797f22c5b18a"
+      "sha256": "63a25eeb7ee56dc2e1c14d623ca02836642867a8d82ceb6d119d46c9eae82c41"
     },
     {
-      "bytes": 34383,
+      "bytes": 36474,
       "classification": "public_candidate",
       "path": "evals/results/adversarial-sandbox.json",
-      "sha256": "3dd2c9a1d2acdaa48bc6057f9f0ccc9b63cecaef0dd6f44f89b23dece27d099a"
+      "sha256": "6bfbe29f878c1b9023396a1748377dc4370b49bb2d019569f745c3c94ebdb120"
     },
     {
       "bytes": 4552,
@@ -205,22 +211,22 @@
       "sha256": "6c47f4b00310aa6669dae29b74850634677c6ef8806ab71088ae3d96b31fa726"
     },
     {
-      "bytes": 22492,
+      "bytes": 23609,
       "classification": "public_candidate",
       "path": "scripts/demo_ui/server.py",
-      "sha256": "900f9f7e8da7d2b2b5ca5d45ed18f01afbe71002a62ed12a664797a82af5dd29"
+      "sha256": "6927c2bdd86a70bbd2a323f6af4520336dbbc578970e5f445f84b6b394b8735b"
     },
     {
-      "bytes": 15239,
+      "bytes": 17007,
       "classification": "public_candidate",
       "path": "scripts/demo_ui/static/app.js",
-      "sha256": "627a7f577db1f5c5d42409aeb0a92ba18c1f2d8e6d344aa5342729623b66303b"
+      "sha256": "56ed9aca6635e97e8128fb26ae18e78263bb1813447b1c9ce76dddb4c942ece9"
     },
     {
-      "bytes": 6675,
+      "bytes": 7058,
       "classification": "public_candidate",
       "path": "scripts/demo_ui/static/index.html",
-      "sha256": "c00ad7ef4e4fb5f3ad37987a708c6045a6b058274c37abc757bd18d1ba7357d0"
+      "sha256": "2c318da1df2ca8f9e3807f96e6e864e94c2a70286086979e7a68dc8f13247b7b"
     },
     {
       "bytes": 7816,
@@ -253,10 +259,10 @@
       "sha256": "6bfc993e5d55877abfc649aad139e22a8ba754edfa4499804f5ac9921d0de4a6"
     },
     {
-      "bytes": 7218,
+      "bytes": 7309,
       "classification": "public_candidate",
       "path": "scripts/run_routing_benchmark.py",
-      "sha256": "89426f37a873dd3f1eff9b29d5808be5826d96fc27b8a9bd1473979dac1b549b"
+      "sha256": "8115b7c1136296e3b167a8fa2116cb766dc0d842a966b0708d0cd47eb6718eaa"
     },
     {
       "bytes": 324,
@@ -283,10 +289,10 @@
       "sha256": "9c5e0b303ff09d8ae06a5150d983bb28364cb0290be6188eca82fac57ffc943d"
     },
     {
-      "bytes": 5941,
+      "bytes": 6391,
       "classification": "public_candidate",
       "path": "src/open_sovereign_router/approvals.py",
-      "sha256": "dd2dca8dca96b70002a36439c8c4750783030cf75f5ee45aea68ca09cf251f93"
+      "sha256": "b5548b5b0c3ac86d088a9e8b43487e620cf713a4dd4e02c3b7b70569a82cd6e4"
     },
     {
       "bytes": 2006,
@@ -307,16 +313,16 @@
       "sha256": "bd7e61f9c369da5f62dd8810e90916e4fd076a2f3159cc3abc91c0a5ccc98973"
     },
     {
-      "bytes": 1346,
+      "bytes": 1479,
       "classification": "public_candidate",
       "path": "src/open_sovereign_router/models.py",
-      "sha256": "5c045820093f86cc08dc408ae8a27cf2f15489875c1c7310ee0e536e5b06fb0a"
+      "sha256": "84f35af18c1dea1c85da1d70b974fff2af9a95050d7f8bb3749913b8cfb7fbac"
     },
     {
-      "bytes": 6192,
+      "bytes": 7178,
       "classification": "public_candidate",
       "path": "src/open_sovereign_router/policy.py",
-      "sha256": "5ca2760e5e398eba88590a827267bbe7c334fcef7aeab1f763a974608dde8f6d"
+      "sha256": "f131376e73d98124512795f27d4d9f72e0a443f6ce9ad87034e54172fc392d58"
     },
     {
       "bytes": 2715,
@@ -325,22 +331,28 @@
       "sha256": "5d5f5f7622c81c5b76f6a274999dbb21ac2358ee2d83987466d813cb7bb0ed89"
     },
     {
+      "bytes": 5671,
+      "classification": "public_candidate",
+      "path": "src/open_sovereign_router/redaction.py",
+      "sha256": "e261dab0d3799810d4ab7ca9b1ed1301d7376a9d77405a37bd13ee4c0ee85552"
+    },
+    {
       "bytes": 1798,
       "classification": "public_candidate",
       "path": "src/open_sovereign_router/registry.py",
       "sha256": "c120afd2659840ca295d383ab25b947d5e87790baa9e2b22948b276789850560"
     },
     {
-      "bytes": 25235,
+      "bytes": 28820,
       "classification": "public_candidate",
       "path": "src/open_sovereign_router/transport.py",
-      "sha256": "a6946755119608bd92a294da02f7e3d4bd8a3eb5b443966266d1d09f686dca37"
+      "sha256": "73c7bd88032889c66736b81d7e404e50d963f9c0b188a21b22a583b3e1c9e0f8"
     },
     {
-      "bytes": 7548,
+      "bytes": 7684,
       "classification": "public_candidate",
       "path": "tests/test_adversarial_eval.py",
-      "sha256": "216f87dfa1f7ca6b285108b382e0a4b89ef5f0c3debfa88bd78be1e79faa94f0"
+      "sha256": "2ecbad66cfec64b3dd3fa8be9b37879880159460a3f70e2efcd9e38b875a303a"
     },
     {
       "bytes": 2142,
@@ -355,10 +367,16 @@
       "sha256": "7d9f6a9fa7ec9bfeb804ca057df457a985eb1401c6b9cc8fa88785410d912c04"
     },
     {
-      "bytes": 17483,
+      "bytes": 19017,
       "classification": "public_candidate",
       "path": "tests/test_demo_ui.py",
-      "sha256": "bdb26f107c91debf172ded96aba0f7d3da4ea0d8a956133a1bb178750a643edc"
+      "sha256": "6702d50a733f19ff08baa3c1b376888f28c4f038ff90c997155f1c3959430252"
+    },
+    {
+      "bytes": 6976,
+      "classification": "public_candidate",
+      "path": "tests/test_redaction.py",
+      "sha256": "40729d8ebe53caf7391dae31aeeeb2d2036437c4113412fdd61642bb11e67750"
     },
     {
       "bytes": 24224,
@@ -373,10 +391,10 @@
       "sha256": "0a09fe35cef4007365374073a923c61297bf006f66b621929898eacbdff04043"
     },
     {
-      "bytes": 13058,
+      "bytes": 14145,
       "classification": "public_candidate",
       "path": "tests/test_security_core.py",
-      "sha256": "fc04c22aa785158b20e1a62a53c035bdc1f3f88a94709964563be40ca6e795fc"
+      "sha256": "f455cfaf30255259834c5bafe899de0d9312899c2584e0bd26cba02c6763ac1a"
     },
     {
       "bytes": 10078,
@@ -385,10 +403,10 @@
       "sha256": "634bee3b61dcce50bdb39a4e6138374c1e4b49d70f21172d2e8f03dd4be43fdd"
     },
     {
-      "bytes": 34046,
+      "bytes": 34275,
       "classification": "public_candidate",
       "path": "tests/test_transport_remediation.py",
-      "sha256": "ad575ffc33f0a1bc01c53158a152dd423f39fb96b09b2a0fc6db1fc04372f305"
+      "sha256": "a473ba01a7e41c26ba17210f0584b443690441d267c12c315021e28f67278116"
     }
   ],
   "private_path_policy": {

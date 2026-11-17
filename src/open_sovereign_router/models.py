@@ -47,6 +47,10 @@ class RoutingRequest:
     payload_sha256: str
     preferred_provider: str | None = None
     preferred_model: str | None = None
+    original_request_sha256: str = ""
+    redaction_config_sha256: str = ""
+    output_budget: int = 0
+    force_local: bool = False
 
 
 @dataclass(frozen=True)

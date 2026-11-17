@@ -21,6 +21,7 @@ from open_sovereign_router.models import Capability, Model, Provider
 from open_sovereign_router.policy import PolicyEngine
 from open_sovereign_router.providers import FakeProvider, ProviderResult
 from open_sovereign_router.registry import Registry
+from open_sovereign_router.redaction import RedactionConfig
 from open_sovereign_router.transport import Identity, IdentityRegistry, Limits, RouterService, build_server
 
 
@@ -412,9 +413,11 @@ class ApprovalStoreHardeningTests(unittest.TestCase):
         pending = payload["approval_request"]
         canonical = json.dumps({"max_tokens": 64, "messages": [{"content": "hello", "role": "user"}]}, sort_keys=True, separators=(",", ":")).encode()
         expected = {
-            "version": 1, "issuer": "open-sovereign-router", "request_id": pending["request_id"], "actor_id": "actor-1",
+            "version": 2, "issuer": "open-sovereign-router", "request_id": pending["request_id"], "actor_id": "actor-1",
             "task": "chat_completions", "required_capability": 1, "preferred_provider": None, "preferred_model": None,
             "payload_sha256": hashlib.sha256(canonical).hexdigest(), "sensitivity": "public", "provider_id": "cloud",
+            "original_request_sha256": hashlib.sha256(canonical).hexdigest(),
+            "redaction_config_sha256": RedactionConfig().fingerprint, "output_budget": 64,
             "model_id": "frontier", "policy_version": "policy-v1", "registry_version": "registry-v1",
         }
         self.assertEqual(pending["bindings"], expected)

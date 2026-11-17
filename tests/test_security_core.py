@@ -39,12 +39,13 @@ def build_registry(local_enabled=True, cloud_enabled=True):
 
 
 def routing_request(capability=Capability.BASIC, provider=None, model=None, payload_hash=PAYLOAD_HASH):
-    return RoutingRequest("req-1", "actor-1", "classify", capability, payload_hash, provider, model)
+    return RoutingRequest("req-1", "actor-1", "classify", capability, payload_hash, provider, model,
+                          "c" * 64, "d" * 64, 128, False)
 
 
 def envelope(req, **changes):
     base = ApprovalEnvelope(
-        version=1,
+        version=2,
         issuer="osr-test-issuer",
         request_id=req.request_id,
         actor_id=req.actor_id,
@@ -53,6 +54,9 @@ def envelope(req, **changes):
         preferred_provider=req.preferred_provider,
         preferred_model=req.preferred_model,
         payload_sha256=req.payload_sha256,
+        original_request_sha256=req.original_request_sha256,
+        redaction_config_sha256=req.redaction_config_sha256,
+        output_budget=req.output_budget,
         sensitivity="public",
         provider_id="cloud",
         model_id="frontier",
@@ -150,9 +154,11 @@ class ApprovalTests(unittest.TestCase):
         req = routing_request(Capability.ADVANCED)
         expected = envelope(req)
         mutations = {
-            "version": 2, "issuer": "other", "request_id": "other", "actor_id": "other",
+            "version": 1, "issuer": "other", "request_id": "other", "actor_id": "other",
             "task": "other", "required_capability": 2, "preferred_provider": "cloud",
-            "preferred_model": "other", "payload_sha256": "b" * 64, "sensitivity": "internal",
+            "preferred_model": "other", "payload_sha256": "b" * 64,
+            "original_request_sha256": "e" * 64, "redaction_config_sha256": "f" * 64,
+            "output_budget": 64, "sensitivity": "internal",
             "provider_id": "other", "model_id": "other", "policy_version": "other",
             "registry_version": "other",
         }
@@ -224,6 +230,17 @@ class PolicyAndAuditTests(unittest.TestCase):
         token = issue_approval(SECRET, envelope(req))
         changed = replace(req, payload_sha256="b" * 64)
         self.assertEqual(self.engine().decide(changed, "public", token, now=110).reason_code, "invalid_approval")
+
+    def test_original_and_redaction_configuration_are_independently_bound(self):
+        req = routing_request(Capability.ADVANCED)
+        token = issue_approval(SECRET, envelope(req))
+        same_outgoing_different_original = replace(req, original_request_sha256="e" * 64)
+        self.assertEqual(self.engine().decide(same_outgoing_different_original, "public", token, now=110).reason_code,
+                         "invalid_approval")
+        token = issue_approval(SECRET, envelope(req, nonce="nonce-0002"))
+        changed_configuration = replace(req, redaction_config_sha256="f" * 64)
+        self.assertEqual(self.engine().decide(changed_configuration, "public", token, now=110).reason_code,
+                         "invalid_approval")
 
     def test_no_silent_fallback(self):
         result = self.engine().decide(routing_request(Capability.ADVANCED), "public", now=110)

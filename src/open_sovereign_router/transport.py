@@ -17,6 +17,7 @@ from .audit_sink import AuditFailure, AuditSink
 from .models import Capability, Decision, RoutingRequest
 from .policy import PolicyEngine
 from .providers import ProviderExecutor, ProviderFailure, ProviderResult
+from .redaction import InspectionResult, REDACTION_MARKER, TextRedactor
 
 
 ALLOWED_BODY_FIELDS = frozenset({"model", "messages", "max_tokens", "stream", "required_capability"})
@@ -152,6 +153,7 @@ class RouterService:
         limits: Limits | None = None,
         clock: Callable[[], float] = time.time,
         monotonic: Callable[[], float] = time.monotonic,
+        redactor: TextRedactor | None = None,
     ):
         self.policy = policy
         self.identities = identities
@@ -159,6 +161,7 @@ class RouterService:
         self.audit = audit
         self.limits = limits or Limits()
         self.clock = clock
+        self.redactor = redactor or TextRedactor(max_messages=self.limits.max_messages, max_message_chars=self.limits.max_message_chars)
         self._slots = threading.BoundedSemaphore(self.limits.max_concurrency)
         self.pending = PendingApprovals(self.limits.pending_approval_ttl_seconds, self.limits.max_pending_approvals, self.limits.max_pending_per_actor, monotonic)
 
@@ -183,6 +186,50 @@ class RouterService:
             return self._chat_locked(identity, approval_token, body, approval_request_id)
         finally:
             self._slots.release()
+
+    def preview(self, api_key: str | None, body: object):
+        """Authenticate, validate and inspect without policy evaluation, audit, or provider execution."""
+        if not self.identities.authenticate(api_key):
+            return error(401, "authentication required", "authentication_error")
+        request_id = uuid.uuid4().hex
+        validated = self._validate(body, request_id)
+        if isinstance(validated[0], int):
+            return validated
+        clean, max_tokens, _, _ = validated
+        inspected = self._inspect(clean)
+        if inspected is None:
+            return error(503, "content inspection unavailable", "inspection_unavailable", request_id)
+        return 200, {
+            "request_id": request_id,
+            "messages": list(inspected.messages),
+            "finding_count": inspected.finding_count,
+            "forces_local": inspected.forces_local,
+            "max_tokens": max_tokens,
+            "notice": "Zero findings does not establish clearance for external release.",
+        }
+
+    def _inspect(self, clean: list[dict[str, str]]) -> InspectionResult | None:
+        try:
+            result = self.redactor.inspect(clean)
+        except Exception:
+            return None
+        if not isinstance(result, InspectionResult):
+            return None
+        if (not isinstance(result.messages, tuple) or len(result.messages) != len(clean)
+                or not isinstance(result.finding_count, int) or isinstance(result.finding_count, bool) or result.finding_count < 0
+                or result.forces_local is not (result.finding_count > 0)
+                or not isinstance(result.configuration_sha256, str) or not re.fullmatch(r"[0-9a-f]{64}", result.configuration_sha256)):
+            return None
+        for index, message in enumerate(result.messages):
+            if (not isinstance(message, dict) or set(message) != {"role", "content"}
+                    or message["role"] != clean[index]["role"] or not isinstance(message["content"], str)
+                    or len(message["content"]) > self.limits.max_message_chars):
+                return None
+        if result.finding_count == 0 and list(result.messages) != clean:
+            return None
+        if result.finding_count > 0 and not any(REDACTION_MARKER in message["content"] for message in result.messages):
+            return None
+        return result
 
     def _audit(self, decision: Decision, outcome: str | None = None) -> bool:
         try:
@@ -247,9 +294,22 @@ class RouterService:
         if isinstance(validated[0], int):
             return validated
         clean, max_tokens, model, capability = validated
-        # The digest covers everything that changes what an approver authorizes: messages and output budget.
-        canonical = json.dumps({"max_tokens": max_tokens, "messages": clean}, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("ascii")
-        routing = RoutingRequest(request_id, identity.actor_id, "chat_completions", capability, hashlib.sha256(canonical).hexdigest(), None, model)
+        inspected = self._inspect(clean)
+        if inspected is None:
+            blocked = Decision("blocked", request_id, identity.actor_id, self.policy.classifier.classify(identity.sensitivity), None, None,
+                               "inspection_unavailable", "content inspection unavailable", False)
+            if not self._audit(blocked):
+                return error(503, "audit unavailable", "audit_unavailable", request_id)
+            return error(503, "content inspection unavailable", "inspection_unavailable", request_id)
+        outgoing = list(inspected.messages)
+        original_canonical = json.dumps({"max_tokens": max_tokens, "messages": clean}, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("ascii")
+        outgoing_canonical = json.dumps({"max_tokens": max_tokens, "messages": outgoing}, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("ascii")
+        routing = RoutingRequest(
+            request_id, identity.actor_id, "chat_completions", capability,
+            hashlib.sha256(outgoing_canonical).hexdigest(), None, model,
+            hashlib.sha256(original_canonical).hexdigest(), inspected.configuration_sha256,
+            max_tokens, inspected.forces_local,
+        )
 
         claimed = None
         if approval_request_id is not None:
@@ -277,6 +337,7 @@ class RouterService:
                 "expires_at": int(self.clock()) + self.limits.pending_approval_ttl_seconds,
                 # Informational, for the approver: the signed digest already covers it, but the approver should see the budget.
                 "max_tokens": max_tokens,
+                "notice": "Redaction does not authorize cloud release. Zero findings does not establish clearance.",
                 "bindings": self.policy.approval_bindings(routing, decision),
             }
             return status, payload
@@ -287,7 +348,7 @@ class RouterService:
             if decision.reason_code == "invalid_approval":
                 return error(409, "invalid approval", "invalid_approval", request_id)
             return error(409 if decision.approval_required else 400, decision.reason, decision.reason_code, request_id)
-        return self._execute(decision, clean, max_tokens, request_id)
+        return self._execute(decision, outgoing, max_tokens, request_id)
 
     def _fail(self, decision: Decision, outcome: str, status: int, message: str, error_type: str, request_id: str):
         if not self._audit(decision, outcome):
