@@ -67,10 +67,15 @@
 
         <p id="form-error" class="error" role="alert" hidden></p>
         <div class="actions">
+          <button id="preview-button" type="button" class="secondary">Preview local redaction</button>
           <button id="run-button" type="submit" class="primary">Run routing policy</button>
           <button id="reset-button" type="button" class="secondary">Reset demo</button>
         </div>
       </form>
+      <article class="card" aria-labelledby="preview-heading">
+        <h2 id="preview-heading">Local redaction preview</h2>
+        <div id="redaction-preview" aria-live="polite"><p class="placeholder">Preview inspects text locally and calls no model.</p></div>
+      </article>
     </section>
 
     <section class="results" aria-labelledby="results-heading">

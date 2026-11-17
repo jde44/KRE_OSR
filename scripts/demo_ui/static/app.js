@@ -5,7 +5,7 @@
 "use strict";
 
 (function () {
-  const state = { token: "", config: null, lastRequest: null, lastResult: null, lastApproval: null };
+  const state = { token: "", config: null, lastRequest: null, lastResult: null, lastApproval: null, preview: null };
   const $ = (id) => document.getElementById(id);
 
   function readToken() {
@@ -92,6 +92,7 @@
   }
 
   function applyPreset(preset, button) {
+    clearPreview();
     document.querySelectorAll(".preset").forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
     $("message").value = preset.message;
     document.querySelector('input[name="sensitivity"][value="' + preset.sensitivity + '"]').checked = true;
@@ -179,6 +180,11 @@
         ["Payload digest", b.payload_sha256.slice(0, 16) + "…"],
         ["Request ID", b.request_id],
       ]);
+      const outgoingTitle = el("p", "Exact outgoing messages", "help");
+      const outgoing = el("div", null, "preview");
+      (result.approval_request.outgoing_messages || []).forEach((message) => {
+        outgoing.append(el("p", message.role + ": " + message.content));
+      });
       const approve = el("button", "Approve this single request", "approve");
       approve.type = "button";
       approve.addEventListener("click", () => approveAndRun(result));
@@ -190,7 +196,7 @@
       });
       const actions = el("div", null, "actions");
       actions.append(approve, cancel);
-      box.replaceChildren(intro, list, actions);
+      box.replaceChildren(intro, list, outgoingTitle, outgoing, actions);
       return;
     }
     if (result.outcome === "routed" && result.decision.approval_verified) {
@@ -294,6 +300,32 @@
     send(parsed.request);
   }
 
+  function clearPreview() {
+    state.preview = null;
+    $("redaction-preview").replaceChildren(el("p", "Preview is stale or has not been run. Preview again before relying on it.", "placeholder"));
+  }
+
+  async function previewRequest() {
+    showFormError("");
+    const parsed = readForm();
+    if (parsed.error) { showFormError(parsed.error); return; }
+    try {
+      const result = await api("/demo/preview", "POST", parsed.request);
+      state.preview = result;
+      const details = el("dl", null, "facts");
+      facts(details, [
+        ["Findings", String(result.finding_count)],
+        ["Forces local routing", result.forces_local ? "yes" : "no"],
+        ["Notice", result.notice],
+      ]);
+      const messages = el("div", null, "preview");
+      result.messages.forEach((message) => messages.append(el("p", message.role + ": " + message.content)));
+      $("redaction-preview").replaceChildren(details, el("p", "Exact outgoing text", "help"), messages);
+    } catch (err) {
+      showFormError(err.message);
+    }
+  }
+
   async function approveAndRun(result) {
     try {
       const granted = await api("/demo/approve", "POST", { bindings: result.approval_request.bindings });
@@ -316,7 +348,7 @@
   async function resetDemo() {
     try {
       await api("/demo/reset", "POST", {});
-      state.lastRequest = state.lastResult = state.lastApproval = null;
+      state.lastRequest = state.lastResult = state.lastApproval = state.preview = null;
       $("request-form").reset();
       updateCount();
       showFormError("");
@@ -325,6 +357,7 @@
       $("decision").replaceChildren(el("p", "No request yet.", "placeholder"));
       $("approval").replaceChildren(el("p", "Cloud routes need explicit approval for each request. Nothing to approve yet.", "placeholder"));
       $("estimate").replaceChildren(el("p", "Estimates appear after a decision.", "placeholder"));
+      $("redaction-preview").replaceChildren(el("p", "Preview inspects text locally and calls no model.", "placeholder"));
       setFlow({});
       renderModels(null);
       await refreshAudit(null);
@@ -352,7 +385,9 @@
     renderModels(null);
     updateCount();
     setFlow({});
-    $("message").addEventListener("input", updateCount);
+    $("message").addEventListener("input", () => { updateCount(); clearPreview(); });
+    document.querySelectorAll('input[name="sensitivity"], #capability, #max-tokens').forEach((node) => node.addEventListener("change", clearPreview));
+    $("preview-button").addEventListener("click", previewRequest);
     $("request-form").addEventListener("submit", (event) => { event.preventDefault(); runRequest(); });
     $("reset-button").addEventListener("click", resetDemo);
     await refreshAudit(null);

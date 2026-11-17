@@ -127,6 +127,23 @@ class PresetScenarioTests(DemoServerMixin, unittest.TestCase):
 
 
 class RoutingControlTests(DemoServerMixin, unittest.TestCase):
+    def test_authenticated_preview_is_no_store_and_calls_no_provider(self):
+        marker = "reviewer" + "@" + "example.invalid"
+        body = {"message": "Contact " + marker, "sensitivity": "public", "capability": "basic", "max_tokens": 16}
+        self.assertEqual(self.call("POST", "/demo/preview", body, token=False)[0], 401)
+        status, preview, headers = self.call("POST", "/demo/preview", body)
+        self.assertEqual(status, 200)
+        self.assertEqual(headers["Cache-Control"], "no-store")
+        self.assertEqual((preview["finding_count"], preview["forces_local"]), (1, True))
+        self.assertNotIn(marker, json.dumps(preview))
+        self.assertEqual(self.calls(), {"local": 0, "cloud": 0})
+
+    def test_cloud_approval_shows_exact_outgoing_messages(self):
+        body = preset_request("public-cloud-approval")
+        result = self.route(body)
+        self.assertEqual(result["approval_request"]["outgoing_messages"],
+                         [{"role": "user", "content": body["message"]}])
+
     def test_sensitive_data_never_reaches_cloud_at_any_capability(self):
         for sensitivity in ("confidential", "restricted"):
             for capability in ("basic", "standard", "advanced"):
@@ -210,7 +227,7 @@ class InputValidationTests(DemoServerMixin, unittest.TestCase):
 
 class BoundaryTests(DemoServerMixin, unittest.TestCase):
     def test_api_requires_the_per_launch_token(self):
-        for method, path in (("GET", "/demo/config"), ("GET", "/demo/audit"), ("POST", "/demo/route"), ("POST", "/demo/approve"), ("POST", "/demo/reset")):
+        for method, path in (("GET", "/demo/config"), ("GET", "/demo/audit"), ("POST", "/demo/route"), ("POST", "/demo/preview"), ("POST", "/demo/approve"), ("POST", "/demo/reset")):
             self.assertEqual(self.call(method, path, {} if method == "POST" else None, token=False)[0], 401, path)
             self.assertEqual(self.call(method, path, {} if method == "POST" else None, token="wrong-token-value-123456")[0], 401, path)
 
@@ -321,6 +338,14 @@ class StaticFrontendTests(unittest.TestCase):
             self.assertIsNone(re.search(r"(?:https?:)?//[A-Za-z0-9.-]+\.[A-Za-z]{2,}", text.replace("/static/", "")), name)
             self.assertNotIn("@import", text)
             self.assertNotIn("url(", text)
+
+    def test_preview_uses_safe_rendering_and_is_cleared_when_inputs_change(self):
+        script = self.read("app.js")
+        self.assertNotIn("innerHTML", script)
+        self.assertIn('message.role + ": " + message.content', script)
+        self.assertIn('addEventListener("input", () => { updateCount(); clearPreview(); })', script)
+        self.assertIn('addEventListener("change", clearPreview)', script)
+        self.assertIn('state.lastApproval = state.preview = null', script)
 
     def test_server_uses_only_stdlib_and_the_router_package(self):
         import ast

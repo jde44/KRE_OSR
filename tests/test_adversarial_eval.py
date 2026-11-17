@@ -123,9 +123,11 @@ class AdversarialEvaluationTests(unittest.TestCase):
         self.assertNotIn("valid-key", raw)
 
     def test_approval_forgery_tamper_expiry_and_replay(self):
-        request = RoutingRequest("req-1", "eval-actor", "chat", Capability.BASIC, "a" * 64)
-        envelope = ApprovalEnvelope(1, "eval-issuer", "req-1", "eval-actor", "chat", 1, None, None,
-                                    "a" * 64, "public", "local", "tiny", "eval-policy-v1", "eval-registry-v1",
+        request = RoutingRequest("req-1", "eval-actor", "chat", Capability.BASIC, "a" * 64, None, None,
+                                 "b" * 64, "c" * 64, 32, False)
+        envelope = ApprovalEnvelope(2, "eval-issuer", "req-1", "eval-actor", "chat", 1, None, None,
+                                    "a" * 64, "b" * 64, "c" * 64, 32,
+                                    "public", "local", "tiny", "eval-policy-v1", "eval-registry-v1",
                                     100, 120, "nonce-0001")
         token = issue_approval(SECRET, envelope)
         verifier = ApprovalVerifier(SECRET)

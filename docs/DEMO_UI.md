@@ -1,5 +1,9 @@
 # Local demo UI
 
+The browser demo includes a **Preview local redaction** action. It authenticates to the loopback application, validates and inspects the synthetic message locally, and calls no provider. The preview shows redacted outgoing text, the merged finding count, whether findings force local routing, and the warning that zero findings does not establish clearance.
+
+When a simulated cloud route requires approval, the approval panel shows the exact outgoing messages using DOM `textContent`; it never uses `innerHTML`. Changing the message, sensitivity, capability, or output budget clears the prior preview, as does reset.
+
 A browser view of the existing router for reviewers. It shows, for one synthetic request at a time, which model the
 policy selects and why, when a cloud route needs explicit single-request approval, when sensitive data is forced
 local or blocked, and the prompt-free audit events the router records.

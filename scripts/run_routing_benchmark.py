@@ -34,7 +34,9 @@ NON_SENSITIVE = {"public", "internal"}
 
 
 def _decide(policy, task):
-    request = RoutingRequest(task["id"], "synthetic-actor", "benchmark", Capability(task["capability"]), hashlib.sha256(task["id"].encode()).hexdigest())
+    digest = hashlib.sha256(task["id"].encode()).hexdigest()
+    request = RoutingRequest(task["id"], "synthetic-actor", "benchmark", Capability(task["capability"]), digest,
+                             None, None, digest, "d" * 64, 128, False)
     decision = policy.decide(request, task["sensitivity"], now=_NOW)
     if task.get("approved") and decision.reason_code == "approval_required":
         # Simulates a human approver signing exactly the bindings the router presents (deterministic nonce).
